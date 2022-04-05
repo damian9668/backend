@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario De Ingreso</title>
+</head>
+<body>
+<h2>Ingrese Producto</h2>
+<form action="api/productos" method="POST">
+    Title: <input type="text" name="title">
+    Price: <input type="text" name="price">
+    Thumbnail: <input type="text" name="thumbnail">
+    <button>Enviar</button>
+</form>
+<h2>Obtener Productos</h2>
+<form action="api/productos" method="GET">
+    <button>Enviar</button>
+</form>
+<h2>Obtener UN Producto</h2>
+<form action="api/productos" method="GET">
+    ID: <input type="text" name="id">
+    <button>Enviar</button>
+</form>
+<h2>Actualizar Producto</h2>
+<form action="api/productos" method="PUT">
+    Title: <input type="text" name="title">
+    Price: <input type="text" name="price">
+    Thumbnail: <input type="text" name="thumbnail">
+    ID: <input type="text" name="id">
+    <button>Enviar</button>
+</form>
+<h2>Eliminar UN Producto</h2>
+<form action="api/productos" method="DELETE">
+    ID: <input type="text" name="id">
+    <button>Enviar</button>
+</form>
+</body>
+</html>
