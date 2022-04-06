@@ -16,5 +16,11 @@
     "price": 158.78,
     "thumbnail": "https://image.shutterstock.com/image-vector/school-measuring-plastic-ruler-20-260nw-615662024.jpg",
     "id": 3
+  },
+  {
+    "title": "test3",
+    "price": "250",
+    "thumbnail": "ffwfwfwfer",
+    "id": 4
   }
 ]

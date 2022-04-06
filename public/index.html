@@ -17,22 +17,23 @@
     <button>Enviar</button>
 </form>
 <h2>Obtener UN Producto</h2>
-<form action="api/productos" method="GET">
-    ID: <input type="text" name="id">
-    <button>Enviar</button>
-</form>
+<div>
+    ID: <input type="text" name="id" id="id">
+    <button onclick="search()">Enviar</button>
+</div>
 <h2>Actualizar Producto</h2>
-<form action="api/productos" method="PUT">
+<div>
     Title: <input type="text" name="title">
     Price: <input type="text" name="price">
     Thumbnail: <input type="text" name="thumbnail">
-    ID: <input type="text" name="id">
-    <button>Enviar</button>
-</form>
+    ID: <input type="text" name="id" id="id">
+    <button onclick="enviar()">Enviar</button>
+</div>
 <h2>Eliminar UN Producto</h2>
 <form action="api/productos" method="DELETE">
     ID: <input type="text" name="id">
     <button>Enviar</button>
 </form>
 </body>
+<script src="index.js"></script>
 </html>
