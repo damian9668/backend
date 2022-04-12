@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EJS</title>
+    <link rel="stylesheet" href="./Style.css">
+</head>
+<body>
+<h1>EJS</h1>
+<ul>
+    <% productos.forEach( function (producto) { %>
+        <li><%= producto.name %></li>
+    <% }) %>
+</ul>
+</body>
+</html>
