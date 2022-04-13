@@ -1,12 +1,24 @@
 doctype html
 head
     meta(charset='UTF-8')
-    title EJS
+    title PUG
     link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3' crossorigin='anonymous')
 h1 PUG
-ul
-    each producto, i in productos
-        li= producto.name + producto.price + producto.url
+table.table
+    thead
+        tr
+            th(scope='col') Producto
+            th(scope='col') Precio
+            th(scope='col') Imagen
+    tbody
+        each producto, i in productos
+            tr
+                td= producto.name
+                td= "$"+producto.price
+                td
+                    img(style='height: 60px; width: 60px' src=producto.url)
+
+
 form(action='/productos' method='POST')
     button.btn.btn-success.mt-3.mb-5 Cargar Productos
 script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p' crossorigin='anonymous')
