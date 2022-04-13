@@ -17,7 +17,7 @@ app.engine("hbs", engine({
 let productos =[];
 
 app.get("/productos",(req,res)=>{
-    res.render("productos",{layout:"index", apitest:productos});
+    res.render("productos",{layout:"index", apitest:productos, noProducts: ()=>productos.length===0, haveProducts: ()=>productos.length>0});
 });
 app.post("/productos",(req,res)=>{
     console.log(req.body);
@@ -25,7 +25,7 @@ app.post("/productos",(req,res)=>{
     if (producto.name && producto.price && producto.url){
         productos.push(req.body);
     }
-    res.render("main",{layout:"index", apitest:productos});
+    res.render("main",{layout:"index", apitest:productos, noProducts: ()=>productos.length===0, haveProducts: ()=>productos.length > 0});
 });
 
 app.listen(PORT,()=>{
