@@ -1,0 +1,11 @@
+<h1>Handlebars</h1>
+<ul>
+    {{#each apitest}}
+        <li>{{this.name}}, {{this.price}},{{this.url}}</li>
+    {{/each}}
+</ul>
+
+<form action="/productos" method="POST">
+    <button class="btn btn-success mt-3 mb-5">Cargar Productos</button>
+</form>
+

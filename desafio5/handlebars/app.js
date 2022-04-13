@@ -4,6 +4,9 @@ const PORT = 8080;
 
 const {engine} = require("express-handlebars");
 
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+
 app.set("view engine","hbs");
 
 app.engine("hbs", engine({
@@ -11,22 +14,18 @@ app.engine("hbs", engine({
     extname: "hbs"
 }));
 
-const fakeApi = () =>{
-    return[
-        {
-            name: "Damian"
-        },
-        {
-            name:"Agus"
-        },
-        {
-            name:"Mati"
-        }
-    ]
-};
+let productos =[];
 
 app.get("/productos",(req,res)=>{
-    res.render("main",{layout:"index", apitest:fakeApi()});
+    res.render("productos",{layout:"index", apitest:productos});
+});
+app.post("/productos",(req,res)=>{
+    console.log(req.body);
+    let producto =req.body;
+    if (producto.name && producto.price && producto.url){
+        productos.push(req.body);
+    }
+    res.render("main",{layout:"index", apitest:productos});
 });
 
 app.listen(PORT,()=>{

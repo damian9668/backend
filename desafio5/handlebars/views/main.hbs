@@ -1,6 +1,25 @@
-<h1>the body</h1>
-<ul>
-    {{#each apitest}}
-        <li>{{this.name}}</li>
-    {{/each}}
-</ul>
+<h1>Handlebars</h1>
+<form action="/productos" method="POST">
+
+    <div class="form-group">
+        <label for="name"><b>Nombre</b></label>
+        <input id="name" class="form-control" type="text" name="name">
+    </div>
+
+    <div class="form-group">
+        <label for="precio"><b>Precio</b></label>
+        <input id="price" class="form-control" type="number" name="price">
+    </div>
+
+    <div class="form-group">
+        <label for="image"><b>URL Imagen</b></label>
+        <input id="url" class="form-control" type="text" name="url">
+    </div>
+
+    <button class="btn btn-success mt-3 mb-5">Enviar</button>
+</form>
+<form action="/productos" method="GET">
+    <button class="btn btn-success mt-3 mb-5">Ver Productos</button>
+</form>
+
+
