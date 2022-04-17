@@ -1,0 +1,29 @@
+<h1>Handlebars</h1>
+{{#if noProducts}}
+    <h3>No hay productos</h3>
+{{/if}}
+{{#if haveProducts}}
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Producto</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Imagen</th>
+    </tr>
+    </thead>
+    <tbody>
+        {{#each apitest}}
+            <tr>
+                <td>{{this.name}}</td>
+                <td>${{this.price}}</td>
+                <td><img style="height: 60px; width: 60px" src="{{this.url}}"></td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{/if}}
+
+<form action="/productos" method="POST">
+    <button class="btn btn-success mt-3 mb-5">Cargar Productos</button>
+</form>
+
