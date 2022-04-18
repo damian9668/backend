@@ -1,4 +1,5 @@
 const express = require ("express");
+const fs =require("fs");
 const { Server: IOServer } = require('socket.io');
 const { Server: HttpServer } = require('http');
 const PORT = 8080;
@@ -24,29 +25,36 @@ app.engine("hbs", engine({
 let productos =[];
 
 app.get("/productos",(req,res)=>{
-    res.render("productos",{layout:"index", apitest:productos, noProducts: ()=>productos.length===0, haveProducts: ()=>productos.length>0});
-});
-app.post("/productos",(req,res)=>{
-    console.log(req.body);
-    let producto =req.body;
-    if (producto.name && producto.price && producto.url){
-        productos.push(req.body);
-    }
-    res.render("main",{layout:"index", apitest:productos, noProducts: ()=>productos.length===0, haveProducts: ()=>productos.length > 0});
+    res.render("main",{layout:"index", noProducts: ()=>productos.length===0, haveProducts: ()=>productos.length>0});
 });
 
 httpServer.listen(PORT, () => console.log('SERVER ON'));
 
 const messages = [];
 
+
 io.on('connection', (socket) => {
     console.log('Usuario conectado');
     // Envio de mensaje
     socket.emit('messages', messages);
+    socket.emit('productos', productos);
+
+    socket.on("producto", producto=>{
+        productos.push({name:producto.name,price:producto.price,url:producto.url});
+        io.sockets.emit('productos', productos);
+    })
 
     socket.on('message', data => {
-        messages.push({ socketid: socket.id, message: data });
+        messages.push({ correo:data.correo, mensaje: data.mensaje, date:data.date });
+        let dataArchivo = JSON.stringify(data,null,2)
+        fs.appendFile("mensajes.txt", dataArchivo, (err) => {
+            if (err)
+                console.log(err);
+            else {
+                console.log("File written successfully\n");
+            }
+        });
         io.sockets.emit('messages', messages);
-    })
+    });
 
 });

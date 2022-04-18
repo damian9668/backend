@@ -1,6 +1,4 @@
-<h1>Handlebars</h1>
-<form action="/productos" method="POST">
-
+<h1>Listado De Productos</h1>
     <div class="form-group">
         <label for="name"><b>Producto</b></label>
         <input id="name" class="form-control" type="text" name="name">
@@ -15,11 +13,22 @@
         <label for="image"><b>URL Imagen</b></label>
         <input id="url" class="form-control" type="text" name="url">
     </div>
+    <button class="btn btn-success mt-3 mb-5" onclick="enviarProductos()">Enviar Producto</button>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Producto</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Imagen</th>
+    </tr>
+    </thead>
+    <tbody>
 
-    <button class="btn btn-success mt-3 mb-5">Enviar</button>
-</form>
-<form action="/productos" method="GET">
-    <button class="btn btn-success mt-3 mb-5">Ver Productos</button>
-</form>
-
-
+    </tbody>
+</table>
+<h1>Centro De Mensajes</h1>
+<input class="form-control" type="email" id="correo">
+<input class="form-control" type="text" id="mensaje">
+<button class="btn btn-success mt-3 mb-5" onclick="enviarMensaje()">Enviar Mensaje</button>
+<p></p>
+<script src="js/index.js"></script>
