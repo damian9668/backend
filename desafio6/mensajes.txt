@@ -1,33 +1,9 @@
 {
-  "correo": "test",
-  "mensaje": "test",
-  "date": "Sun Apr 17 2022 21:36:43"
-}{
-  "correo": "test@test",
-  "mensaje": "test",
-  "date": "Sun Apr 17 2022 21:36:55"
-}{
-  "correo": "usuario2@gmail.com",
+  "correo": "usuario1@test",
   "mensaje": "hola",
-  "date": "Sun Apr 17 2022 21:39:46"
+  "date": "Sun Apr 17 2022 22:09:19"
 }{
-  "correo": "usuario1@test",
+  "correo": "usuario2@test",
   "mensaje": "como estas?",
-  "date": "Sun Apr 17 2022 21:40:03"
-}{
-  "correo": "usuario2@gmail.com",
-  "mensaje": "todo bien",
-  "date": "Sun Apr 17 2022 21:40:22"
-}{
-  "correo": "usuario2@gmail.com",
-  "mensaje": "faltan productos",
-  "date": "Sun Apr 17 2022 21:40:32"
-}{
-  "correo": "usuario1@test",
-  "mensaje": "cuales?",
-  "date": "Sun Apr 17 2022 21:40:45"
-}{
-  "correo": "231213",
-  "mensaje": "231123",
-  "date": "Sun Apr 17 2022 21:43:36"
+  "date": "Sun Apr 17 2022 22:09:41"
 }
