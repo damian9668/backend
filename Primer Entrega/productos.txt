@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Escuadra",
+    "price": 123.45,
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Squadra_45.jpg",
+    "id": 1
+  },
+  {
+    "title": "Calculadora",
+    "price": 234.56,
+    "thumbnail": "https://images.fravega.com/f500/3f2414348e45ea02df6da508d3adf366.jpg",
+    "id": 2
+  },
+  {
+    "title": "Regla",
+    "price": 158.78,
+    "thumbnail": "https://image.shutterstock.com/image-vector/school-measuring-plastic-ruler-20-260nw-615662024.jpg",
+    "id": 3
+  }
+]
