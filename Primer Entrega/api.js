@@ -21,6 +21,20 @@ const server = app.listen(PORT, ()=>{
 })
 server.on("error",error => console.log(error))
 
+const esAdmin = true
+
+function soloAdmins(req,res,next){
+    const error ={
+        error:-1,
+        descripcion: `ruta: ${req.originalUrl} metodo: ${req.method} no autorizada`
+    }
+    console.log(req.url)
+    if(!esAdmin){
+        res.status(400).send(error);
+    }else{
+        next()
+    }
+}
 
 router.get("",async (req, res)=>{
     const message = await contenedor.getAll();
@@ -38,13 +52,13 @@ router.get("/:id",async (req, res)=>{
     }
 })
 
-router.post("",async (req, res)=>{
+router.post("",soloAdmins,async (req, res)=>{
     const producto = req.body;
     const resp = await contenedor.save(producto);
     res.json(resp);
 })
 
-router.put("/:id",async(req, res)=>{
+router.put("/:id",soloAdmins,async(req, res)=>{
     const id = req.params.id;
     const body = req.body;
     const resp = await contenedor.updateById(id,body);
@@ -57,7 +71,7 @@ router.put("/:id",async(req, res)=>{
 
 })
 
-router.delete("/:id",async (req, res)=>{
+router.delete("/:id",soloAdmins,async (req, res)=>{
     const id = req.params.id;
     const message = await contenedor.deleteById(id);
     console.log(message);
@@ -136,3 +150,9 @@ routerCarrito.delete("/:id",async (req, res)=>{
 
 app.use("/api/carrito", routerCarrito)
 app.use('/api/productos', router);
+app.use((req, res, next) => {
+    res.status(404).json({
+        error: -2,
+        descripcion: `ruta: ${req.path} metodo: ${req.method} no implemetada`
+    })
+})

@@ -1,5 +1,7 @@
 const fs = require('fs');
 
+
+
 class Contenedor{
     constructor(nombre){
         this.archivo=nombre;
