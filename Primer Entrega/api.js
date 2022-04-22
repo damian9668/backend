@@ -1,6 +1,6 @@
 const Contenedor = require("./funciones.js");
 const contenedor = new Contenedor('productos.txt');
-const contenedorCarrito = new Contenedor("carritos.txt");
+const contenedorCarrito = new Contenedor('carritos.txt');
 
 const express = require("express");
 const { Router } = express;
@@ -72,23 +72,64 @@ router.delete("/:id",async (req, res)=>{
 })
 
 routerCarrito.post("",async (req, res)=>{
-    res.json("test");
+    const carrito = req.body;
+    const resp = await contenedorCarrito.save(carrito);
+    res.json(resp);
 })
 
 routerCarrito.post("/:id/productos",async (req, res)=>{
-    res.json("test");
+   const id = req.params.id;
+   const producto = await contenedor.getById(id);
+    if(producto.error != null){
+        res.status(400).send(producto);
+    }
+    else{
+        const resp = await contenedorCarrito.saveCarrito(producto);
+        res.json(resp);
+    }
 })
 
 routerCarrito.get("/:id/productos",async (req, res)=>{
-    res.json("test");
+    const id = req.params.id;
+    const resp = await contenedorCarrito.getById(id)
+    if(resp.error != null){
+        res.status(400).send(resp);
+    }
+    else{
+        res.json(resp.productos);
+    }
 })
 
 routerCarrito.delete("/:id/productos/:id_prod",async (req, res)=>{
-    res.json("test");
+    const idCarrito = req.params.id;
+    const idProducto = req.params.id_prod;
+    const carrito = await contenedorCarrito.getById(idCarrito);
+    if(carrito.error != null){
+        res.status(400).send(carrito);
+    }
+    else{
+        if(carrito.productos.id == idProducto){
+            const resp = await contenedorCarrito.updateCarritoById(idCarrito,"");
+            res.json(resp);
+        }
+        else{
+            res.status(400).send("producto no encontrado");
+        }
+
+    }
 })
 
 routerCarrito.delete("/:id",async (req, res)=>{
-    res.json("test");
+    const id = req.params.id;
+    const message = await contenedorCarrito.deleteById(id);
+    //console.log(message);
+
+    if(message.error != null){
+        res.status(400).send(message);
+    }
+    else{
+        res.json("carrito eliminado");
+    }
 })
 
 

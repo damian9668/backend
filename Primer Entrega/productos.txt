@@ -1,20 +1,32 @@
 [
   {
-    "title": "Escuadra",
-    "price": 123.45,
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Squadra_45.jpg",
-    "id": 1
+    "nombre": "Regla",
+    "descripcion": "Regla",
+    "codigo": 25879,
+    "foto": "https://cdn0.iconfinder.com/data/icons/graphic-design-tools-1/32/Ruler-Measurement-Scale-Measure-128.png",
+    "precio": 145.78,
+    "stock": 23,
+    "id": 1,
+    "timestamp": 1650637266118
   },
   {
-    "title": "Calculadora",
-    "price": 234.56,
-    "thumbnail": "https://images.fravega.com/f500/3f2414348e45ea02df6da508d3adf366.jpg",
-    "id": 2
+    "nombre": "Cuaderno",
+    "descripcion": "Libro",
+    "codigo": 28959,
+    "foto": "https://cdn2.iconfinder.com/data/icons/unigrid-phantom-multimedia-vol-6/60/020_256_rules_do_not_list_book_history_education_study_learn_knowledge-128.png",
+    "precio": 237.78,
+    "stock": 56,
+    "id": 2,
+    "timestamp": 1650637355398
   },
   {
-    "title": "Regla",
-    "price": 158.78,
-    "thumbnail": "https://image.shutterstock.com/image-vector/school-measuring-plastic-ruler-20-260nw-615662024.jpg",
-    "id": 3
+    "nombre": "Lapiz",
+    "descripcion": "Lapiz",
+    "codigo": 58957,
+    "foto": "https://cdn2.iconfinder.com/data/icons/flat-seo-web-ikooni/128/flat_seo2-32-128.png",
+    "precio": 150.35,
+    "stock": 142,
+    "id": 3,
+    "timestamp": 1650637423617
   }
 ]
