@@ -1,11 +1,13 @@
 const Contenedor = require("./funciones.js");
 const contenedor = new Contenedor('productos.txt');
+const contenedorCarrito = new Contenedor("carritos.txt");
 
 const express = require("express");
 const { Router } = express;
 
 const app = express();
 const router = Router();
+const routerCarrito = Router();
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -69,4 +71,27 @@ router.delete("/:id",async (req, res)=>{
 
 })
 
+routerCarrito.post("",async (req, res)=>{
+    res.json("test");
+})
+
+routerCarrito.post("/:id/productos",async (req, res)=>{
+    res.json("test");
+})
+
+routerCarrito.get("/:id/productos",async (req, res)=>{
+    res.json("test");
+})
+
+routerCarrito.delete("/:id/productos/:id_prod",async (req, res)=>{
+    res.json("test");
+})
+
+routerCarrito.delete("/:id",async (req, res)=>{
+    res.json("test");
+})
+
+
+
+app.use("/api/carrito", routerCarrito)
 app.use('/api/productos', router);
