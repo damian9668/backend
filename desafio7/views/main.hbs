@@ -1,0 +1,55 @@
+<div class="d-flex flex-column align-items-center">
+    <div class="card w-50">
+        <h1 class="text-center">Listado De Productos</h1>
+        <div class="card-body">
+            <div class="form-group">
+                <label for="name"><b>Producto</b></label>
+                <input id="name" class="form-control" type="text" name="name">
+            </div>
+
+            <div class="form-group">
+                <label for="precio"><b>Precio</b></label>
+                <input id="price" class="form-control" type="number" name="price">
+            </div>
+
+            <div class="form-group">
+                <label for="image"><b>URL Imagen</b></label>
+                <input id="url" class="form-control" type="text" name="url">
+            </div>
+            <button class="btn btn-success mt-3 mb-5" onclick="enviarProductos()">Enviar Producto</button>
+        </div>
+    </div>
+    <div class="card w-50">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Imagen</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card w-50">
+        <h1 class="text-center">Centro De Mensajes</h1>
+        <div class="card-body">
+            <label for="correo"><b>Correo</b></label>
+            <input class="form-control" type="email" id="correo" name="correo">
+
+            <label for="mensaje"><b>Mensaje</b></label>
+            <input class="form-control" type="text" id="mensaje" name="mensaje">
+
+            <button class="btn btn-success mt-3 mb-5" onclick="enviarMensaje()">Enviar Mensaje</button>
+            <p></p>
+            <script src="js/index.js"></script>
+        </div>
+    </div>
+</div>
+
+
+

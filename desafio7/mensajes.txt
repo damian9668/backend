@@ -1,0 +1,9 @@
+{
+  "correo": "usuario1@test",
+  "mensaje": "hola",
+  "date": "Sun Apr 17 2022 22:09:19"
+}{
+  "correo": "usuario2@test",
+  "mensaje": "como estas?",
+  "date": "Sun Apr 17 2022 22:09:41"
+}
