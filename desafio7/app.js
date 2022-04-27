@@ -41,11 +41,13 @@ io.on('connection', (socket) => {
 
     socket.on("producto", producto=>{
         productos.push({name:producto.name,price:producto.price,url:producto.url});
+        //agregar aca sql producto
         io.sockets.emit('productos', productos);
     })
 
     socket.on('message', data => {
         messages.push({ correo:data.correo, mensaje: data.mensaje, date:data.date });
+        //agregar aca sql mensajes
         let dataArchivo = JSON.stringify(data,null,2)
         fs.appendFile("mensajes.txt", dataArchivo, (err) => {
             if (err)
