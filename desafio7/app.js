@@ -1,13 +1,17 @@
 const express = require ("express");
+const ContenedorSQL = require("./ContenedorSQL")
+const {optionsMariaDb,optionsSQL} = require("./mysqlDB");
 const fs =require("fs");
 const { Server: IOServer } = require('socket.io');
 const { Server: HttpServer } = require('http');
-const PORT = 8080;
+const PORT = 8081;
 
 const app = express();
 const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
 
+const contenedorSQL = new ContenedorSQL("productos",optionsMariaDb)
+const contenedorSQL2 = new ContenedorSQL("mensajes",optionsSQL)
 
 const {engine} = require("express-handlebars");
 
@@ -41,21 +45,15 @@ io.on('connection', (socket) => {
 
     socket.on("producto", producto=>{
         productos.push({name:producto.name,price:producto.price,url:producto.url});
-        //agregar aca sql producto
+        //console.log(producto);
+        contenedorSQL.guardarProducto(producto);
         io.sockets.emit('productos', productos);
     })
 
     socket.on('message', data => {
         messages.push({ correo:data.correo, mensaje: data.mensaje, date:data.date });
+       contenedorSQL2.guardarMensaje(data);
         //agregar aca sql mensajes
-        let dataArchivo = JSON.stringify(data,null,2)
-        fs.appendFile("mensajes.txt", dataArchivo, (err) => {
-            if (err)
-                console.log(err);
-            else {
-                console.log("File written successfully\n");
-            }
-        });
         io.sockets.emit('messages', messages);
     });
 

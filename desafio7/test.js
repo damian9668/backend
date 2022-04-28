@@ -1,10 +1,18 @@
 const ContenedorSQL = require("./ContenedorSQL")
-const contenedorSQL = new ContenedorSQL("mensajes")
+const {optionsMariaDb,optionsSQL} = require("./mysqlDB");
+const contenedorSQL = new ContenedorSQL("productos",optionsMariaDb)
+const contenedorSQL2 = new ContenedorSQL("mensajes",optionsSQL)
 
 let prueba ={
+    name: "test",
+    price: 32,
+    url: "Sun Apr 17 2022 22:09:41"
+}
+let prueba2 ={
     correo: "test",
-    mensaje: "como estas?",
+    mensaje: "hola",
     date: "Sun Apr 17 2022 22:09:41"
 }
 
-//contenedorSQL.guardarMensaje(prueba);
+contenedorSQL2.guardarMensaje(prueba2);
+contenedorSQL.guardarProducto(prueba);
