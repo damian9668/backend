@@ -1,10 +1,9 @@
 const express = require ("express");
 const ContenedorSQL = require("./ContenedorSQL")
 const {optionsMariaDb,optionsSQL} = require("./mysqlDB");
-const fs =require("fs");
 const { Server: IOServer } = require('socket.io');
 const { Server: HttpServer } = require('http');
-const PORT = 8081;
+const PORT = 3000;
 
 const app = express();
 const httpServer = new HttpServer(app);
@@ -43,16 +42,20 @@ io.on('connection', (socket) => {
     socket.emit('messages', messages);
     socket.emit('productos', productos);
 
-    socket.on("producto", producto=>{
+    socket.on("producto", async producto=>{
         productos.push({name:producto.name,price:producto.price,url:producto.url});
         //console.log(producto);
-        contenedorSQL.guardarProducto(producto);
+        try {
+            await contenedorSQL.guardarProducto(producto);
+        } catch (e) {
+            console.error(e);
+        }
         io.sockets.emit('productos', productos);
     })
 
-    socket.on('message', data => {
+    socket.on('message', async data => {
         messages.push({ correo:data.correo, mensaje: data.mensaje, date:data.date });
-       contenedorSQL2.guardarMensaje(data);
+       await contenedorSQL2.guardarMensaje(data);
         //agregar aca sql mensajes
         io.sockets.emit('messages', messages);
     });

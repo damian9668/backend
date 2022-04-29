@@ -1,98 +1,83 @@
 const knex = require("knex")
 
 class ContenedorSQL {
-    constructor(tabla,config){
+    constructor(tabla, config) {
         this.tabla = tabla
         this.knex = knex(config)
     }
 
     async listar(id) {
+        //console.log(response)
+       return this.knex.select("*").from(this.tabla).where("id", id);
 
     }
 
     async listarAll() {
-
+        return this.knex.select("*").from(this.tabla)
     }
 
     async guardarMensaje(elem) {
-        let tabla = this.tabla;
-        let knex = this.knex;
-        //console.log(tabla)
-        knex.schema.hasTable(tabla).then(function(exists) {
-            //console.log(exists)
+
+        try{
+            const exists = await this.knex.schema.hasTable(this.tabla);
+
             if (!exists) {
-                knex.schema.createTable(tabla,table=>{
+                await this.knex.schema.createTable(this.tabla, table => {
                     table.increments("id")
                     table.string("correo")
                     table.string("mensaje")
                     table.string("date")
-                }).then(()=> console.log("tabla creada"))
-                    .catch((err)=>{console.log(err);throw err})
-                    .finally(()=>{
-                        knex(tabla).insert(elem)
-                            .then((data)=>console.log(data))
-                            .catch((err)=>{console.log(err);throw err})
-                            .finally(()=>{
-                                knex.destroy();
-                            })
-                    })
-            }else{
-                knex(tabla).insert(elem)
-                    .then((data)=>console.log(data))
-                    .catch((err)=>{console.log(err);throw err})
-                    .finally(()=>{
-                        knex.destroy();
-                    })
+                })
             }
-        });
+
+
+            const response = await this.knex(this.tabla).insert(elem);
+
+            console.info('New entry created ', response);
+        }catch(e){
+            console.error(e);
+        }
     }
+
     async guardarProducto(elem) {
-        let tabla = this.tabla;
-        let knex = this.knex
-        knex.schema.hasTable(tabla).then(function(exists) {
-            //console.log(exists)
-            if (!exists) {
-               // console.log(tabla)
-                knex.schema.createTable(tabla,table=>{
+        try {
+            let tabla = this.tabla;
+            let knex = this.knex
+
+            const exist = await knex.schema.hasTable(tabla)
+
+            if (!exist) {
+                await knex.schema.createTable(tabla, table => {
                     table.increments("id")
                     table.string("name")
                     table.integer("price")
                     table.string("url")
-                }).then(()=> console.log("tabla creada"))
-                    .catch((err)=>{console.log(err);throw err})
-                    .finally(()=>{
-                        knex(tabla).insert(elem)
-                            .then((data)=>console.log(data))
-                            .catch((err)=>{console.log(err);throw err})
-                            .finally(()=>{
-                                knex.destroy();
-                            })
-                    })
-            }else{
-                knex(tabla).insert(elem)
-                    .then((data)=>console.log(data))
-                    .catch((err)=>{console.log(err);throw err})
-                    .finally(()=>{
-                        knex.destroy();
-                    })
+                })
             }
-        });
-    }
-    async actualizar(elem, id) {
+            const response = await knex(tabla).insert(elem)
+            console.info('New entry created ', response);
 
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    async actualizar(elem, id) {
+      return this.knex(this.tabla).update(elem).where("id",id)
     }
 
 
     async borrar(id) {
-
+        return this.knex(this.tabla).where("id",id).del()
     }
 
     async borrarAll() {
-
+        return this.knex(this.tabla).del()
     }
 
     async desconectar() {
-
+        return this.knex.destroy()
     }
 }
+
 module.exports = ContenedorSQL
