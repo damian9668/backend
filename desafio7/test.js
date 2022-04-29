@@ -20,7 +20,7 @@ const contenedorSQL2 = new ContenedorSQL("mensajes",optionsSQL)
 //contenedorSQL2.listar(2).then(value => console.log(value))
 //contenedorSQL2.listarAll().then(value => console.log(value))
 // contenedorSQL2.actualizar( {
-//         correo: 'agus gay',
+//         correo: 'agus',
 //         mensaje: '21qwqwe',
 //         date: 'Thu Apr 28 2022 22:07:51'
 //     },1
