@@ -8,8 +8,7 @@
         "foto": "https://cdn2.iconfinder.com/data/icons/flat-seo-web-ikooni/128/flat_seo2-32-128.png",
         "precio": 150.35,
         "stock": 142,
-        "id": 3,
-        "timestamp": 1650657535615
+        "id": 1
       },
       {
         "nombre": "Lapiz",
@@ -18,11 +17,10 @@
         "foto": "https://cdn2.iconfinder.com/data/icons/flat-seo-web-ikooni/128/flat_seo2-32-128.png",
         "precio": 150.35,
         "stock": 142,
-        "id": 3,
-        "timestamp": 1650657535615
+        "id": 4
       }
     ],
-    "id": 1,
-    "timestamp": 1651203809937
+    "id": 2,
+    "timestamp": 1651243748253
   }
 ]
