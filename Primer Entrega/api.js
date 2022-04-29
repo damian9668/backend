@@ -36,20 +36,22 @@ function soloAdmins(req,res,next){
     }
 }
 
-router.get("",async (req, res)=>{
-    const message = await contenedor.getAll();
-    //console.log(message);
-    res.json(message);
-})
-router.get("/:id",async (req, res)=>{
+router.get("/:id?",async (req, res)=>{
     const id = req.params.id;
-    const resp = await contenedor.getById(id)
-    if(resp.error != null){
-        res.status(400).send(resp);
+    if(id === undefined){
+        const message = await contenedor.getAll();
+        //console.log(message);
+        res.json(message);
+    }else{
+        const resp = await contenedor.getById(id)
+        if(resp.error != null){
+            res.status(400).send(resp);
+        }
+        else{
+            res.json(resp);
+        }
     }
-    else{
-        res.json(resp);
-    }
+
 })
 
 router.post("",soloAdmins,async (req, res)=>{
@@ -86,21 +88,16 @@ router.delete("/:id",soloAdmins,async (req, res)=>{
 })
 
 routerCarrito.post("",async (req, res)=>{
-    const carrito = req.body;
+    const carrito = {productos: [ ]};
     const resp = await contenedorCarrito.save(carrito);
     res.json(resp);
 })
 
 routerCarrito.post("/:id/productos",async (req, res)=>{
    const id = req.params.id;
-   const producto = await contenedor.getById(id);
-    if(producto.error != null){
-        res.status(400).send(producto);
-    }
-    else{
-        const resp = await contenedorCarrito.saveCarrito(producto);
-        res.json(resp);
-    }
+   const producto = req.body
+   const resp = await contenedorCarrito.updateCarritoById(id,producto);
+   res.json(resp);
 })
 
 routerCarrito.get("/:id/productos",async (req, res)=>{

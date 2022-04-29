@@ -1,63 +1,28 @@
 [
   {
-    "productos": {
-      "nombre": "Regla",
-      "descripcion": "Regla",
-      "codigo": 25879,
-      "foto": "https://cdn0.iconfinder.com/data/icons/graphic-design-tools-1/32/Ruler-Measurement-Scale-Measure-128.png",
-      "precio": 145.78,
-      "stock": 23,
-      "id": 1,
-      "timestamp": 1650637266118
-    },
+    "productos": [
+      {
+        "nombre": "Lapiz",
+        "descripcion": "Lapiz",
+        "codigo": 58957,
+        "foto": "https://cdn2.iconfinder.com/data/icons/flat-seo-web-ikooni/128/flat_seo2-32-128.png",
+        "precio": 150.35,
+        "stock": 142,
+        "id": 3,
+        "timestamp": 1650657535615
+      },
+      {
+        "nombre": "Lapiz",
+        "descripcion": "Lapiz",
+        "codigo": 58957,
+        "foto": "https://cdn2.iconfinder.com/data/icons/flat-seo-web-ikooni/128/flat_seo2-32-128.png",
+        "precio": 150.35,
+        "stock": 142,
+        "id": 3,
+        "timestamp": 1650657535615
+      }
+    ],
     "id": 1,
-    "timestamp": 1650639936636
-  },
-  {
-    "productos": {
-      "nombre": "Cuaderno",
-      "descripcion": "Libro",
-      "codigo": 28959,
-      "foto": "https://cdn2.iconfinder.com/data/icons/unigrid-phantom-multimedia-vol-6/60/020_256_rules_do_not_list_book_history_education_study_learn_knowledge-128.png",
-      "precio": 237.78,
-      "stock": 56,
-      "id": 2,
-      "timestamp": 1650637355398
-    },
-    "id": 2,
-    "timestamp": 1650639940261
-  },
-  {
-    "productos": {
-      "nombre": "Lapiz",
-      "descripcion": "Lapiz",
-      "codigo": 58957,
-      "foto": "https://cdn2.iconfinder.com/data/icons/flat-seo-web-ikooni/128/flat_seo2-32-128.png",
-      "precio": 150.35,
-      "stock": 142,
-      "id": 3,
-      "timestamp": 1650637423617
-    },
-    "id": 3,
-    "timestamp": 1650639944429
-  },
-  {
-    "productos": "",
-    "id": "4",
-    "timestamp": 1650643794345
-  },
-  {
-    "productos": {
-      "nombre": "Regla",
-      "descripcion": "Regla",
-      "codigo": 25879,
-      "foto": "https://cdn0.iconfinder.com/data/icons/graphic-design-tools-1/32/Ruler-Measurement-Scale-Measure-128.png",
-      "precio": 145.78,
-      "stock": 23,
-      "id": 1,
-      "timestamp": 1650637266118
-    },
-    "id": 5,
-    "timestamp": 1650640168812
+    "timestamp": 1651203809937
   }
 ]

@@ -27,7 +27,7 @@ class Contenedor{
             // console.log(contenido)
             const info = JSON.parse(contenido);
             let carrito={}
-            carrito.productos=object
+            carrito.productos=[object]
             carrito.id=(info.length+1);
             carrito.timestamp = Date.now()
             info.push(carrito);
@@ -129,20 +129,12 @@ class Contenedor{
         try{
             const contenido = await fs.promises.readFile(this.archivo,'utf8');
             const info = JSON.parse(contenido);
-            if (idCarrito > info.length){
-                throw new Error("Ups");
-            }
-           // console.log(info);
-            const index = info.findIndex(prod =>prod.id == idCarrito);
-            let updateProd = {}
-            updateProd.productos = nuevoProducto;
-            updateProd.id=idCarrito;
-            updateProd.timestamp = Date.now();
-
-            info[index]=updateProd;
             //console.log(info);
+            const index = info.findIndex(prod =>prod.id == idCarrito);
+            info[index].productos.push(nuevoProducto)
+            info[index].timestamp= Date.now()
+           // console.log(info)
             await fs.promises.writeFile(this.archivo,JSON.stringify(info,null,2));
-            //console.log(updateProd);
             return "OK";
 
         }catch(error){
