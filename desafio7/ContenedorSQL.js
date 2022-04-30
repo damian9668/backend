@@ -41,20 +41,18 @@ class ContenedorSQL {
 
     async guardarProducto(elem) {
         try {
-            let tabla = this.tabla;
-            let knex = this.knex
 
-            const exist = await knex.schema.hasTable(tabla)
+            const exist = await this.knex.schema.hasTable(this.tabla)
 
             if (!exist) {
-                await knex.schema.createTable(tabla, table => {
+                await this.knex.schema.createTable(this.tabla, table => {
                     table.increments("id")
                     table.string("name")
                     table.integer("price")
                     table.string("url")
                 })
             }
-            const response = await knex(tabla).insert(elem)
+            const response = await this.knex(this.tabla).insert(elem)
             console.info('New entry created ', response);
 
         } catch (e) {
