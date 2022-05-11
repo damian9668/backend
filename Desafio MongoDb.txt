@@ -1,0 +1,183 @@
+como utilizar mongo?
+desde la ruta de instalacion, ejecutar cmd y ejecutar "mongo"
+
+// usar db ecommerce
+> use ecommerce
+> switched to db ecommerce
+
+//creacion de las colecciones
+
+> db.createCollection("productos")
+{ "ok" : 1 }
+> db.createCollection("mensajes")
+{ "ok" : 1 }
+
+//insert 10 productos
+> db.productos.insert({name:"regla",price: 150,url: "www.testimg"})
+WriteResult({ "nInserted" : 1 })
+> db.productos.insert({name:"escuadra",price: 200,url: "www.testimg"})
+WriteResult({ "nInserted" : 1 })
+> db.productos.insert({name:"transportador",price: 1001,url: "www.testimg"})
+WriteResult({ "nInserted" : 1 })
+> db.productos.insert({name:"compas",price: 300,url: "www.testimg"})
+WriteResult({ "nInserted" : 1 })
+> db.productos.insert({name:"goma",price: 100,url: "www.testimg"})
+WriteResult({ "nInserted" : 1 })
+> db.productos.insert({name:"lapicera",price: 400,url: "www.testimg"})
+WriteResult({ "nInserted" : 1 })
+> db.productos.insert({name:"lapiz",price: 200,url: "www.testimg"})
+WriteResult({ "nInserted" : 1 })
+> db.productos.insert({name:"cuaderno",price: 500,url: "www.testimg"})
+WriteResult({ "nInserted" : 1 })
+> db.productos.insert({name:"block de notas",price: 3001,url: "www.testimg"})
+WriteResult({ "nInserted" : 1 })
+> db.productos.insert({name:"hojas milimetradas",price: 100,url: "www.testimg"})
+WriteResult({ "nInserted" : 1 })
+>
+
+//insert 10 mensajes
+> db.mensajes.insert({correo: "user1@test",mensaje: "hola1",date:"2022-01-17T13:24:00Z"})
+WriteResult({ "nInserted" : 1 })
+> db.mensajes.insert({correo: "user2@test",mensaje: "hola2",date:"2022-01-17T13:24:00Z"})
+WriteResult({ "nInserted" : 1 })
+> db.mensajes.insert({correo: "user3@test",mensaje: "hola3",date:"2022-01-17T13:24:00Z"})
+WriteResult({ "nInserted" : 1 })
+> db.mensajes.insert({correo: "user4@test",mensaje: "hola4",date:"2022-01-17T13:24:00Z"})
+WriteResult({ "nInserted" : 1 })
+> db.mensajes.insert({correo: "user5@test",mensaje: "hola5",date:"2022-01-17T13:24:00Z"})
+WriteResult({ "nInserted" : 1 })
+> db.mensajes.insert({correo: "user6@test",mensaje: "hola6",date:"2022-01-17T13:24:00Z"})
+WriteResult({ "nInserted" : 1 })
+> db.mensajes.insert({correo: "user7@test",mensaje: "hola7",date:"2022-01-17T13:24:00Z"})
+WriteResult({ "nInserted" : 1 })
+> db.mensajes.insert({correo: "user8@test",mensaje: "hola8",date:"2022-01-17T13:24:00Z"})
+WriteResult({ "nInserted" : 1 })
+> db.mensajes.insert({correo: "user9@test",mensaje: "hola9",date:"2022-01-17T13:24:00Z"})
+WriteResult({ "nInserted" : 1 })
+> db.mensajes.insert({correo: "user10@test",mensaje: "hola10",date:"2022-01-17T13:24:00Z"})
+WriteResult({ "nInserted" : 1 })
+
+//listar todos los productos y mensajes
+
+> db.productos.find()
+{ "_id" : ObjectId("6276fe803d792909bfb36025"), "name" : "regla", "price" : 150, "url" : "www.testimg" }
+{ "_id" : ObjectId("6276feaf3d792909bfb36026"), "name" : "escuadra", "price" : 200, "url" : "www.testimg" }
+{ "_id" : ObjectId("6276fed63d792909bfb36027"), "name" : "transportador", "price" : 250, "url" : "www.testimg" }
+{ "_id" : ObjectId("6276fef43d792909bfb36028"), "name" : "compas", "price" : 300, "url" : "www.testimg" }
+{ "_id" : ObjectId("6276ff093d792909bfb36029"), "name" : "goma", "price" : 100, "url" : "www.testimg" }
+{ "_id" : ObjectId("6276ff193d792909bfb3602a"), "name" : "lapicera", "price" : 400, "url" : "www.testimg" }
+{ "_id" : ObjectId("6276ff2c3d792909bfb3602b"), "name" : "lapiz", "price" : 200, "url" : "www.testimg" }
+{ "_id" : ObjectId("6276ff3c3d792909bfb3602c"), "name" : "cuaderno", "price" : 500, "url" : "www.testimg" }
+{ "_id" : ObjectId("6276ff4c3d792909bfb3602d"), "name" : "block de notas", "price" : 550, "url" : "www.testimg" }
+{ "_id" : ObjectId("6276ff673d792909bfb3602e"), "name" : "hojas milimetradas", "price" : 100, "url" : "www.testimg" }
+> db.mensajes.find()
+{ "_id" : ObjectId("627700563d792909bfb3602f"), "correo" : "user1@test", "mensaje" : "hola1", "date" : "2022-01-17T13:24:00Z" }
+{ "_id" : ObjectId("6277006e3d792909bfb36030"), "correo" : "user2@test", "mensaje" : "hola2", "date" : "2022-01-17T13:24:00Z" }
+{ "_id" : ObjectId("627700783d792909bfb36031"), "correo" : "user3@test", "mensaje" : "hola3", "date" : "2022-01-17T13:24:00Z" }
+{ "_id" : ObjectId("627700863d792909bfb36032"), "correo" : "user4@test", "mensaje" : "hola4", "date" : "2022-01-17T13:24:00Z" }
+{ "_id" : ObjectId("627700913d792909bfb36033"), "correo" : "user5@test", "mensaje" : "hola5", "date" : "2022-01-17T13:24:00Z" }
+{ "_id" : ObjectId("6277009e3d792909bfb36034"), "correo" : "user6@test", "mensaje" : "hola6", "date" : "2022-01-17T13:24:00Z" }
+{ "_id" : ObjectId("627700a73d792909bfb36035"), "correo" : "user7@test", "mensaje" : "hola7", "date" : "2022-01-17T13:24:00Z" }
+{ "_id" : ObjectId("627700b03d792909bfb36036"), "correo" : "user8@test", "mensaje" : "hola8", "date" : "2022-01-17T13:24:00Z" }
+{ "_id" : ObjectId("627700b93d792909bfb36037"), "correo" : "user9@test", "mensaje" : "hola9", "date" : "2022-01-17T13:24:00Z" }
+{ "_id" : ObjectId("627700c33d792909bfb36038"), "correo" : "user10@test", "mensaje" : "hola10", "date" : "2022-01-17T13:24:00Z" }
+
+//contar cantidad de documentos en mensajes y productos
+
+> db.productos.count()
+10
+> db.mensajes.count()
+10
+
+//CRUD
+
+CREATE
+> db.productos.insert({name:"testname",price: 500,url: "www.testurl"})
+WriteResult({ "nInserted" : 1 })
+
+//READ/FILTERS
+//menor a 1000
+> db.productos.find({price:{$lt:1000}})
+{ "_id" : ObjectId("6276fe803d792909bfb36025"), "name" : "regla", "price" : 150, "url" : "www.testimg" }
+{ "_id" : ObjectId("6276feaf3d792909bfb36026"), "name" : "escuadra", "price" : 200, "url" : "www.testimg" }
+{ "_id" : ObjectId("6276fef43d792909bfb36028"), "name" : "compas", "price" : 300, "url" : "www.testimg" }
+{ "_id" : ObjectId("6276ff093d792909bfb36029"), "name" : "goma", "price" : 100, "url" : "www.testimg" }
+{ "_id" : ObjectId("6276ff193d792909bfb3602a"), "name" : "lapicera", "price" : 400, "url" : "www.testimg" }
+{ "_id" : ObjectId("6276ff2c3d792909bfb3602b"), "name" : "lapiz", "price" : 200, "url" : "www.testimg" }
+{ "_id" : ObjectId("6276ff3c3d792909bfb3602c"), "name" : "cuaderno", "price" : 500, "url" : "www.testimg" }
+{ "_id" : ObjectId("6276ff673d792909bfb3602e"), "name" : "hojas milimetradas", "price" : 100, "url" : "www.testimg" }
+{ "_id" : ObjectId("627702633d792909bfb36039"), "name" : "testname", "price" : 500, "url" : "www.testurl" }
+
+
+//mayor que 1000 y menor que 3000
+> db.productos.find({price:{$gt:1000,$lt:3000}})
+{ "_id" : ObjectId("6276fed63d792909bfb36027"), "name" : "transportador", "price" : 1001, "url" : "www.testimg" }
+
+//mayor que 3000
+> db.productos.find({price:{$gt:3000}})
+{ "_id" : ObjectId("6276ff4c3d792909bfb3602d"), "name" : "block de notas", "price" : 3001, "url" : "www.testimg" }
+>
+//mostrar solo el nombre del 3er producto mas barato
+
+> db.productos.find({},{name:1,_id:0}).sort({price:1}).skip(2).limit(1)
+{ "name" : "regla" }
+
+//UPDATE todos los productos con campo stock
+
+> db.productos.updateMany({},{$set:{stock:100}})
+{ "acknowledged" : true, "matchedCount" : 11, "modifiedCount" : 11 }
+> db.productos.find({})
+{ "_id" : ObjectId("6276fe803d792909bfb36025"), "name" : "regla", "price" : 150, "url" : "www.testimg", "stock" : 100 }
+{ "_id" : ObjectId("6276feaf3d792909bfb36026"), "name" : "escuadra", "price" : 200, "url" : "www.testimg", "stock" : 100 }
+{ "_id" : ObjectId("6276fed63d792909bfb36027"), "name" : "transportador", "price" : 1001, "url" : "www.testimg", "stock" : 100 }
+{ "_id" : ObjectId("6276fef43d792909bfb36028"), "name" : "compas", "price" : 300, "url" : "www.testimg", "stock" : 100 }
+{ "_id" : ObjectId("6276ff093d792909bfb36029"), "name" : "goma", "price" : 100, "url" : "www.testimg", "stock" : 100 }
+{ "_id" : ObjectId("6276ff193d792909bfb3602a"), "name" : "lapicera", "price" : 400, "url" : "www.testimg", "stock" : 100 }
+{ "_id" : ObjectId("6276ff2c3d792909bfb3602b"), "name" : "lapiz", "price" : 200, "url" : "www.testimg", "stock" : 100 }
+{ "_id" : ObjectId("6276ff3c3d792909bfb3602c"), "name" : "cuaderno", "price" : 500, "url" : "www.testimg", "stock" : 100 }
+{ "_id" : ObjectId("6276ff4c3d792909bfb3602d"), "name" : "block de notas", "price" : 3001, "url" : "www.testimg", "stock" : 100 }
+{ "_id" : ObjectId("6276ff673d792909bfb3602e"), "name" : "hojas milimetradas", "price" : 100, "url" : "www.testimg", "stock" : 100 }
+{ "_id" : ObjectId("627702633d792909bfb36039"), "name" : "testname", "price" : 500, "url" : "www.testurl", "stock" : 100 }
+
+//update de stock a mayores de 4000 (para la prueba se colocaron precios mayores a 4000 desde mongo compass)
+
+> db.productos.updateMany({price:{$gt:4000}},{$set:{stock:0}})
+{ "acknowledged" : true, "matchedCount" : 2, "modifiedCount" : 2 }
+> db.productos.find({})
+{ "_id" : ObjectId("6276fe803d792909bfb36025"), "name" : "regla", "price" : 150, "url" : "www.testimg", "stock" : 100 }
+{ "_id" : ObjectId("6276feaf3d792909bfb36026"), "name" : "escuadra", "price" : 200, "url" : "www.testimg", "stock" : 100 }
+{ "_id" : ObjectId("6276fed63d792909bfb36027"), "name" : "transportador", "price" : 1001, "url" : "www.testimg", "stock" : 100 }
+{ "_id" : ObjectId("6276fef43d792909bfb36028"), "name" : "compas", "price" : 300, "url" : "www.testimg", "stock" : 100 }
+{ "_id" : ObjectId("6276ff093d792909bfb36029"), "name" : "goma", "price" : 100, "url" : "www.testimg", "stock" : 100 }
+{ "_id" : ObjectId("6276ff193d792909bfb3602a"), "name" : "lapicera", "price" : 400, "url" : "www.testimg", "stock" : 100 }
+{ "_id" : ObjectId("6276ff2c3d792909bfb3602b"), "name" : "lapiz", "price" : 200, "url" : "www.testimg", "stock" : 100 }
+{ "_id" : ObjectId("6276ff3c3d792909bfb3602c"), "name" : "cuaderno", "price" : 5001, "url" : "www.testimg", "stock" : 0 }
+{ "_id" : ObjectId("6276ff4c3d792909bfb3602d"), "name" : "block de notas", "price" : 3001, "url" : "www.testimg", "stock" : 100 }
+{ "_id" : ObjectId("6276ff673d792909bfb3602e"), "name" : "hojas milimetradas", "price" : 4001, "url" : "www.testimg", "stock" : 0 }
+{ "_id" : ObjectId("627702633d792909bfb36039"), "name" : "testname", "price" : 500, "url" : "www.testurl", "stock" : 100 }
+
+
+//borrar productos con precio menor que 1000
+
+> db.productos.deleteMany({price:{$lt:1000}})
+{ "acknowledged" : true, "deletedCount" : 7 }
+> db.productos.find({})
+{ "_id" : ObjectId("6276fed63d792909bfb36027"), "name" : "transportador", "price" : 1001, "url" : "www.testimg", "stock" : 100 }
+{ "_id" : ObjectId("6276ff3c3d792909bfb3602c"), "name" : "cuaderno", "price" : 5001, "url" : "www.testimg", "stock" : 0 }
+{ "_id" : ObjectId("6276ff4c3d792909bfb3602d"), "name" : "block de notas", "price" : 3001, "url" : "www.testimg", "stock" : 100 }
+{ "_id" : ObjectId("6276ff673d792909bfb3602e"), "name" : "hojas milimetradas", "price" : 4001, "url" : "www.testimg", "stock" : 0 }
+
+//crear usuario con solo lectura
+
+> db.createUser({user: "pepe", pwd: "asd456", roles: [{role: "read", db: "ecommerce"}]})
+Successfully added user: {
+        "user" : "pepe",
+        "roles" : [
+                {
+                        "role" : "read",
+                        "db" : "ecommerce"
+                }
+        ]
+}
+
+
