@@ -102,7 +102,7 @@ app.listen(3000, async () => {
   //  console.log(await carritosDao.delete("627f209c7e25d2554f79580c"))
 
     //--------------CREATE-------------//
-//  console.log(await productosFirebaseDao.create());
+ console.log(await productosFirebaseDao.create());
 
  })
 
