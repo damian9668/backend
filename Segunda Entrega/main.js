@@ -12,16 +12,14 @@ app.listen(3000, async () => {
     const carritosDao = new CarritoMongoDAO();
 
     const productosFirebaseDao = new ProductoFirebaseDAO()
-    await productosFirebaseDao.connect()
+    await productosFirebaseDao.connect();
 
    // await productosDao.connect();
    // await carritosDao.connect();
-//Productos
-    //---------------READ---------//
+//---------------------------------------------Productos Mongo-------------------------//
+
    // console.log(await productosDao.findAll())
 
-
-    //--------------CREATE-------------//
     // console.log(await productosDao.create({
     //     nombre: 'test4',
     //     descripcion: 'sarasa',
@@ -32,7 +30,6 @@ app.listen(3000, async () => {
     //     timestamp: new Date(),
     // }));
 
-    //----------UPDATE----------//
 //     console.log(await productosDao.update('627f0da829b1c6edb0277f72',{
 //             nombre: 'test2',
 //             descripcion: 'sarasa',
@@ -42,17 +39,11 @@ app.listen(3000, async () => {
 //             stock: 1,
 //             timestamp: new Date(),
 //     }))
-    //-----------DELETE---------//
 //  console.log(await productosDao.delete("627f163f8e72fb5f3daa6395"))
 
-
-
-
-    //----------------------------------------CARRITO---------------------//
-                    //-------------READ----------//
+// ----------------------------------------Mongo Carrito----------------------------------------------------------//
    // console.log(await carritosDao.findAll())
 
-                    //----------CREATE-------------------//
 //     console.log(await carritosDao.create(
 //         {
 //             "productos": [
@@ -81,7 +72,6 @@ app.listen(3000, async () => {
 //         }
 //     ));
 
-            //----------------UPDATE---------------//
     // console.log(await carritosDao.update('627f208c5032c2e37423a3f2', {
     //         "productos": [
     //             {
@@ -97,12 +87,22 @@ app.listen(3000, async () => {
     //         ],
     //         "timestamp": new Date()
     //     }))
-
-        //------------------DELETE---------------//
   //  console.log(await carritosDao.delete("627f209c7e25d2554f79580c"))
 
-    //--------------CREATE-------------//
- console.log(await productosFirebaseDao.create());
+    //--------------CRUD Firebase Productos-------------//
+    const test = {
+        nombre: 'update',
+        descripcion: 'sarasa',
+        codigo: 178,
+        foto: 'http://asdasdasd.com',
+        precio: 1234,
+        stock: 1,
+        timestamp: new Date(),
+    }
+    //console.log(await productosFirebaseDao.create(test));
+    //console.log(await productosFirebaseDao.read());
+    //console.log(await productosFirebaseDao.update("TObDqTjsY62Eqb5gIInw",test))
+    //console.log(await productosFirebaseDao.delete("FM8ZgsOQYLMcxOfkmUvq"))
 
  })
 

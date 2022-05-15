@@ -1,25 +1,48 @@
 import {contenedorFirebase} from "../contenedores/contenedorFirebase.js";
 
 
-const test = {
-    nombre: 'test4',
-    descripcion: 'sarasa',
-    codigo: 178,
-    foto: 'http://asdasdasd.com',
-    precio: 1234,
-    stock: 1,
-    timestamp: new Date(),
-}
+
 
 
 export class ProductoFirebaseDAO extends contenedorFirebase{
 
-    // async create(){
-    //     try{
-    //         await query.doc().set({ nombre: "red" })
-    //
-    //     }catch (e) {
-    //         console.log(e);
-    //     }
-    // }
+    async create(object){
+        try{
+            const db = await this.connect();
+            await db.collection("productos").doc().set(object);
+            return "OK"
+        }catch (e) {
+            console.log(e);
+        }
+    }
+    async read(){
+        try{
+            const db = await this.connect()
+            const snapshot = await db.collection("productos").get()
+            snapshot.forEach(doc => {
+                console.log({ id: doc.id, ...doc.data() })
+            });
+            return "OK"
+        }catch (e) {
+            console.log(e)
+        }
+    }
+    async update(id,producto){
+        try{
+            const db = await this.connect()
+            await db.collection("productos").doc(id).update(producto)
+            return "OK"
+        }catch (e) {
+            console.log(e)
+        }
+    }
+    async delete(id){
+        try{
+            const db = await this.connect()
+            await db.collection("productos").doc(id).delete()
+            return "OK"
+        }catch (e) {
+            console.log(e)
+        }
+    }
 }
