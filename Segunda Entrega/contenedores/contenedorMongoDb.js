@@ -13,5 +13,6 @@ export class ContenedorMongoDb {
         }, (error) => {
             console.log('Connection error', error);
         });
+        console.log("conectado")
     }
 }

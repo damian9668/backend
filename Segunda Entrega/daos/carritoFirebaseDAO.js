@@ -1,6 +1,6 @@
 import {contenedorFirebase} from "../contenedores/contenedorFirebase.js";
 
-export class CarritoFirebaseDAO extends contenedorFirebase{
+export class CarritoDAO extends contenedorFirebase{
 
     async create(object){
         try{

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import {ContenedorMongoDb} from "../contenedores/contenedorMongoDb.js";
 import {productosSchema} from "./productoMongoDAO.js";
 
-export class CarritoMongoDAO extends ContenedorMongoDb{
+export class CarritoDAO extends ContenedorMongoDb{
 
     carritosSchema = new mongoose.Schema({
        productos:[{type: productosSchema}],
@@ -11,7 +11,7 @@ export class CarritoMongoDAO extends ContenedorMongoDb{
 
     CarritosModel = mongoose.model("carritos", this.carritosSchema)
 
-    async findAll() {
+    async read() {
         try{
             return this.CarritosModel.find();
         }catch(e){

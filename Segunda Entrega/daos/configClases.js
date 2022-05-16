@@ -1,10 +1,14 @@
-//import {ProductoFirebaseDAO} from "./productoFirebaseDAO.js";
-import {CarritoFirebaseDAO} from "./carritoFirebaseDAO.js";
-//import {ProductoMongoDAO} from "./productoMongoDAO.js";
-import {CarritoMongoDAO} from "./carritoMongoDAO.js";
+import {ContenedorMongoDb} from "../contenedores/contenedorMongoDb.js";
 
-const daoActive = 'firebase'
+const conectar = new ContenedorMongoDb()
+const base = "firebase"
 
-const { ProductoDAO } = await import(daoActive !== 'firebase' ? './productoMongoDAO.js' : './productoFirebaseDAO.js');
+const { ProductoDAO } = await import(base !== 'firebase' ? './productoMongoDAO.js' : './productoFirebaseDAO.js');
+const { CarritoDAO } = await import(base !== 'firebase' ? './carritoMongoDAO.js' : './carritoFirebaseDAO.js')
+
+if(base !== "firebase"){
+    await conectar.connect();
+}
 
 export const productoDaoInstance =  new ProductoDAO();
+export const carritoDaoInstance = new CarritoDAO();

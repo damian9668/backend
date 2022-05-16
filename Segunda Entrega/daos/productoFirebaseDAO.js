@@ -11,7 +11,7 @@ export class ProductoDAO extends contenedorFirebase{
             console.log(e);
         }
     }
-    async findAll(){
+    async read(){
         try{
             const db = await this.connect()
             const snapshot = await db.collection("productos").get()

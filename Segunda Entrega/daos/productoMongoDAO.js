@@ -15,7 +15,7 @@ export class ProductoDAO extends ContenedorMongoDb {
 
     ProductosModel = mongoose.model('productos', productosSchema)
 
-    async findAll() {
+    async read() {
         try{
             return this.ProductosModel.find();
         }catch(e){
