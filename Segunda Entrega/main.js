@@ -1,5 +1,4 @@
 import express from 'express';
-export const daoActive = 'mongo'
 import {carritoDaoInstance, productoDaoInstance} from "./daos/configClases.js";
 const app = express();
 
