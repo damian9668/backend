@@ -2,6 +2,7 @@ import express from 'express';
 import { ProductoMongoDAO } from "./daos/productoMongoDAO.js";
 import {CarritoMongoDAO} from "./daos/carritoMongoDAO.js";
 import {ProductoFirebaseDAO} from "./daos/productoFirebaseDAO.js";
+import {CarritoFirebaseDAO} from "./daos/carritoFirebaseDAO.js";
 
 const app = express();
 
@@ -12,13 +13,16 @@ app.listen(3000, async () => {
     const carritosDao = new CarritoMongoDAO();
 
     const productosFirebaseDao = new ProductoFirebaseDAO()
-    await productosFirebaseDao.connect();
+    const carritosFirebaseDao = new CarritoFirebaseDAO()
 
-   // await productosDao.connect();
-   // await carritosDao.connect();
+    await carritosFirebaseDao.connect()
+    //  await productosFirebaseDao.connect();
+
+    // await productosDao.connect();
+    // await carritosDao.connect();
 //---------------------------------------------Productos Mongo-------------------------//
 
-   // console.log(await productosDao.findAll())
+    // console.log(await productosDao.findAll())
 
     // console.log(await productosDao.create({
     //     nombre: 'test4',
@@ -42,7 +46,7 @@ app.listen(3000, async () => {
 //  console.log(await productosDao.delete("627f163f8e72fb5f3daa6395"))
 
 // ----------------------------------------Mongo Carrito----------------------------------------------------------//
-   // console.log(await carritosDao.findAll())
+    // console.log(await carritosDao.findAll())
 
 //     console.log(await carritosDao.create(
 //         {
@@ -87,24 +91,55 @@ app.listen(3000, async () => {
     //         ],
     //         "timestamp": new Date()
     //     }))
-  //  console.log(await carritosDao.delete("627f209c7e25d2554f79580c"))
+    //  console.log(await carritosDao.delete("627f209c7e25d2554f79580c"))
 
     //--------------CRUD Firebase Productos-------------//
-    const test = {
-        nombre: 'update',
-        descripcion: 'sarasa',
-        codigo: 178,
-        foto: 'http://asdasdasd.com',
-        precio: 1234,
-        stock: 1,
-        timestamp: new Date(),
-    }
+    // const test = {
+    //     nombre: 'update',
+    //     descripcion: 'sarasa',
+    //     codigo: 178,
+    //     foto: 'http://asdasdasd.com',
+    //     precio: 1234,
+    //     stock: 1,
+    //     timestamp: new Date(),
+    // }
     //console.log(await productosFirebaseDao.create(test));
     //console.log(await productosFirebaseDao.read());
     //console.log(await productosFirebaseDao.update("TObDqTjsY62Eqb5gIInw",test))
     //console.log(await productosFirebaseDao.delete("FM8ZgsOQYLMcxOfkmUvq"))
 
- })
+    //----------CRUD Firebase Carrito---------//
+    // const carrito = {
+    //     productos: [
+    //         {
+    //             nombre: "Lapiz",
+    //             descripcion: "Lapiz",
+    //             codigo: 58957,
+    //             foto: "https://cdn2.iconfinder.com/data/icons/flat-seo-web-ikooni/128/flat_seo2-32-128.png",
+    //             precio: 150.35,
+    //             stock: 142,
+    //             id: 1
+    //         },
+    //         {
+    //             nombre: "test carrito",
+    //             descripcion: "test carrito",
+    //             codigo: 58957,
+    //             foto: "https://cdn2.iconfinder.com/data/icons/flat-seo-web-ikooni/128/flat_seo2-32-128.png",
+    //             precio: 150.35,
+    //             stock: 142,
+    //             id: 4
+    //         }
+    //     ],
+    //     timestamp: new Date()
+    // }
+
+//console.log(await carritosFirebaseDao.create(carrito));
+// console.log(await carritosFirebaseDao.read());
+// console.log(await carritosFirebaseDao.update("X9f9Dr5iBCyGWvfMdXP1",carrito))
+// console.log(await carritosFirebaseDao.delete("X9f9Dr5iBCyGWvfMdXP1"))
+})
+
+
 
 
 
