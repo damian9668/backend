@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+import {config} from "../config/mongoConfig.js";
 
-const URL = 'mongodb://127.0.0.1:27017/ecommerce';
+const URL = config;
 
 export class ContenedorMongoDb {
     constructor() {}

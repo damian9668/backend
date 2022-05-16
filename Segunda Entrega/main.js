@@ -1,21 +1,24 @@
 import express from 'express';
-import { ProductoMongoDAO } from "./daos/productoMongoDAO.js";
+//import { ProductoMongoDAO } from "./daos/productoMongoDAO.js";
 import {CarritoMongoDAO} from "./daos/carritoMongoDAO.js";
-import {ProductoFirebaseDAO} from "./daos/productoFirebaseDAO.js";
+//import {ProductoFirebaseDAO} from "./daos/productoFirebaseDAO.js";
 import {CarritoFirebaseDAO} from "./daos/carritoFirebaseDAO.js";
+import {productoDaoInstance} from "./daos/configClases.js";
+//import { carritoDao } from "./daos/configClases.js";
 
 const app = express();
+//export const servidor = "firebase";
 
 app.listen(3000, async () => {
     console.log("Server up")
 
-    const productosDao = new ProductoMongoDAO();
-    const carritosDao = new CarritoMongoDAO();
+    //const productosDao = new ProductoMongoDAO();
+   // const carritosDao = new CarritoMongoDAO();
 
-    const productosFirebaseDao = new ProductoFirebaseDAO()
-    const carritosFirebaseDao = new CarritoFirebaseDAO()
+  //  const productosFirebaseDao = new ProductoFirebaseDAO()
+  //  const carritosFirebaseDao = new CarritoFirebaseDAO()
 
-    await carritosFirebaseDao.connect()
+  //  await carritosFirebaseDao.connect()
     //  await productosFirebaseDao.connect();
 
     // await productosDao.connect();
@@ -104,7 +107,7 @@ app.listen(3000, async () => {
     //     timestamp: new Date(),
     // }
     //console.log(await productosFirebaseDao.create(test));
-    //console.log(await productosFirebaseDao.read());
+ //   console.log(await productosFirebaseDao.read());
     //console.log(await productosFirebaseDao.update("TObDqTjsY62Eqb5gIInw",test))
     //console.log(await productosFirebaseDao.delete("FM8ZgsOQYLMcxOfkmUvq"))
 
@@ -134,9 +137,11 @@ app.listen(3000, async () => {
     // }
 
 //console.log(await carritosFirebaseDao.create(carrito));
-// console.log(await carritosFirebaseDao.read());
+ //console.log(await carritoDao.read());
 // console.log(await carritosFirebaseDao.update("X9f9Dr5iBCyGWvfMdXP1",carrito))
 // console.log(await carritosFirebaseDao.delete("X9f9Dr5iBCyGWvfMdXP1"))
+
+    console.log(await productoDaoInstance.findAll());
 })
 
 

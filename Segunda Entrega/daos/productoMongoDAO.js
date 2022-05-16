@@ -11,7 +11,7 @@ export const productosSchema = new mongoose.Schema({
     timestamp: {type: Date, required: true},
 });
 
-export class ProductoMongoDAO extends ContenedorMongoDb {
+export class ProductoDAO extends ContenedorMongoDb {
 
     ProductosModel = mongoose.model('productos', productosSchema)
 

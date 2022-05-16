@@ -1,6 +1,6 @@
 import {contenedorFirebase} from "../contenedores/contenedorFirebase.js";
 
-export class ProductoFirebaseDAO extends contenedorFirebase{
+export class ProductoDAO extends contenedorFirebase{
 
     async create(object){
         try{
@@ -11,7 +11,7 @@ export class ProductoFirebaseDAO extends contenedorFirebase{
             console.log(e);
         }
     }
-    async read(){
+    async findAll(){
         try{
             const db = await this.connect()
             const snapshot = await db.collection("productos").get()
