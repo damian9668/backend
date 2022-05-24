@@ -1,28 +1,46 @@
-const ContenedorSQL = require("./ContenedorSQL")
-const {optionsMariaDb,optionsSQL} = require("./mysqlDB");
-const {log} = require("util");
-const contenedorSQL = new ContenedorSQL("productos",optionsMariaDb)
-const contenedorSQL2 = new ContenedorSQL("mensajes",optionsSQL)
+const normalizr = require('normalizr');
+const normalize = normalizr.normalize;
+const denormalize = normalizr.denormalize;
 
-// let prueba ={
-//     name: "test",
-//     price: 32,
-//     url: "Sun Apr 17 2022 22:09:41"
-// }
-// let prueba2 ={
-//     correo: "test",
-//     mensaje: "hola",
-//     date: "Sun Apr 17 2022 22:09:41"
-// }
-//
-// contenedorSQL2.guardarMensaje(prueba2);
-// contenedorSQL.guardarProducto(prueba);
-//contenedorSQL2.listar(2).then(value => console.log(value))
-//contenedorSQL2.listarAll().then(value => console.log(value))
-// contenedorSQL2.actualizar( {
-//         correo: 'agus',
-//         mensaje: '21qwqwe',
-//         date: 'Thu Apr 28 2022 22:07:51'
-//     },1
-// ).then(value => console.log(value))
-//contenedorSQL.borrarAll().then(value => console.log(value))
+const schema = normalizr.schema;
+
+const blogpost = {
+    id:"mensaje",
+    author:{
+        id: "correo@test",
+        nombre: "damian",
+        apellido: "ullmann",
+        edad: 25,
+        alias: "fatman",
+        avatar: "NO",
+    },
+    text:"hola dsadasdasd"
+};
+
+// Definir un esquema de usuarios (autores y comentarios)
+const authorSchema = new schema.Entity('authors');
+
+// Definir esquema de comentarios
+const commentSchema = new schema.Entity('text');
+
+// Definir un esquema de artículos
+const postSchema = new schema.Entity('posts', {
+    author: authorSchema,
+    text: [commentSchema]
+});
+
+const util = require('util');
+
+function print(objeto) {
+    console.log(util.inspect(objeto, false, 12, true));
+}
+
+console.log('------OBJETO NORMALIZADO----');
+const normalizedData = normalize(blogpost, postSchema);
+print(normalizedData);
+console.log(JSON.stringify(normalizedData).length);
+
+console.log('------OBJETO DESNORMALIZADO----');
+const denormalizedData = denormalize(normalizedData.result, postSchema, normalizedData.entities);
+print(denormalizedData);
+console.log(JSON.stringify(denormalizedData).length);

@@ -1,4 +1,7 @@
 const socket = io();
+//const normalizr = require("normalizr");
+const normalize = normalizr.normalize;
+const denormalize = normalizr.denormalize;
 
 const correo = document.getElementById("id");
 const nombre = document.getElementById("userName");
@@ -11,6 +14,22 @@ const datos = document.getElementById("mensaje");
 const name = document.getElementById("name");
 const price = document.getElementById("price");
 const url = document.getElementById("url");
+
+const schema = normalizr.schema;
+
+const authorSchema = new schema.Entity('authors');
+
+
+const textSchema = new schema.Entity('text');
+
+
+const mensajeSchema = new schema.Entity('mensaje', {
+    author: authorSchema,
+    text: [textSchema]
+});
+const postSchema = new schema.Entity('posts', {
+    posts: [mensajeSchema]
+});
 
 
 function enviarProductos (){
@@ -31,6 +50,7 @@ function enviarMensaje(){
     let fecha = Date()
 
     let mensaje = {
+        id:"mensaje",
         author:{
             id: correo.value,
             nombre: nombre.value,
@@ -42,8 +62,9 @@ function enviarMensaje(){
         text: datos.value
     }
     if(mensaje.author.id && mensaje.text){
-        socket.emit('message', mensaje);
-        //console.log(mensaje)
+        const normalizedData = normalize(mensaje, mensajeSchema);
+       // console.log(normalizedData);
+        socket.emit('message', normalizedData);
         document.getElementById("mensaje").value = ""
     }
 
@@ -57,8 +78,14 @@ socket.on('productos', productos => {
 });
 
 socket.on('messages', messages => {
-    const htmlMessages = messages.map(
-        message => `<a style="color: blue">${message.author.id}</a>: <a style="color: green">${message.text}</a> <img src=${message.author.avatar} style="height: 30px; width: 30px">`
-    ).join('<br>');
-    document.querySelector('p').innerHTML = htmlMessages;
+    //console.log(messages);
+    const denormalizedData = denormalize(messages.result, [postSchema], messages.entities);
+    //console.log(denormalizedData)
+    if (denormalizedData){
+        const htmlMessages = denormalizedData.map(
+            message => `<a style="color: blue">${message.author.id}</a>: <a style="color: green">${message.text}</a> <img src=${message.author.avatar} style="height: 30px; width: 30px">`
+        ).join('<br>');
+        document.querySelector('p').innerHTML = htmlMessages;
+    }
+
 });

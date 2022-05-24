@@ -5,6 +5,12 @@ const ContenedorMongoDb = require("./ContenedorMongo");
 const {optionsMariaDb,optionsSQL} = require("./mysqlDB");
 const { Server: IOServer } = require('socket.io');
 const { Server: HttpServer } = require('http');
+const normalizr = require('normalizr');
+const normalize = normalizr.normalize;
+const denormalize = normalizr.denormalize;
+
+const schema = normalizr.schema;
+
 const PORT = 8080;
 
 const app = express();
@@ -13,7 +19,6 @@ const io = new IOServer(httpServer);
 
 const contenedorSQL = new ContenedorSQL("productos",optionsMariaDb)
 const contenedorMongo = new ContenedorMongoDb()
-
 
 
 const {engine} = require("express-handlebars");
@@ -50,6 +55,22 @@ contenedorMongo.connect().then().catch((error)=>{
     console.log(error);
 });
 
+const authorSchema = new schema.Entity('authors');
+
+
+const textSchema = new schema.Entity('text');
+
+
+const mensajeSchema = new schema.Entity('mensaje', {
+    author: authorSchema,
+    text: [textSchema]
+});
+const postSchema = new schema.Entity('posts', {
+    posts: [mensajeSchema]
+});
+
+let contador = 0;
+
 io.on('connection', (socket) => {
     console.log('Usuario conectado');
     // Envio de mensaje
@@ -68,21 +89,28 @@ io.on('connection', (socket) => {
     })
 
     socket.on('message', async data => {
-        messages.push({
-            author:{
-                id: data.author.id,
-                nombre: data.author.nombre,
-                apellido: data.author.apellido,
-                edad: data.author.edad,
-                alias: data.author.alias,
-                avatar: data.author.avatar,
-            },
-            text: data.text
-        });
-        await contenedorMongo.guardarMensaje(data);
-        //agregar aca sql mensajes
 
-        io.sockets.emit('messages', messages);
+        const denormalizedData = denormalize(data.result, mensajeSchema, data.entities);
+        //console.log(denormalizedData);
+
+        messages.push({
+            id:"mensaje"+contador,
+            author:{
+                id: denormalizedData.author.id,
+                nombre: denormalizedData.author.nombre,
+                apellido: denormalizedData.author.apellido,
+                edad: denormalizedData.author.edad,
+                alias: denormalizedData.author.alias,
+                avatar: denormalizedData.author.avatar,
+            },
+            text: denormalizedData.text
+        });
+        contador++;
+        await contenedorMongo.guardarMensaje(denormalizedData);
+        //console.log(messages)
+        const normalizedData = normalize(messages, [postSchema]);
+        //console.log(normalizedData)
+        io.sockets.emit('messages', normalizedData);
     });
 
 });

@@ -77,5 +77,4 @@ class ContenedorSQL {
         return this.knex.destroy()
     }
 }
-
 module.exports = ContenedorSQL
