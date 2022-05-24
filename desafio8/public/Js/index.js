@@ -78,10 +78,13 @@ socket.on('productos', productos => {
 });
 
 socket.on('messages', messages => {
-    //console.log(messages);
     const denormalizedData = denormalize(messages.result, [postSchema], messages.entities);
-    //console.log(denormalizedData)
     if (denormalizedData){
+        let a = JSON.stringify(messages).length;
+        let b = JSON.stringify(denormalizedData).length;
+        let compresion = (b * 100)/a;
+        //console.log(compresion);
+        document.querySelector('h2').innerHTML = "Compresión: "+compresion;
         const htmlMessages = denormalizedData.map(
             message => `<a style="color: blue">${message.author.id}</a>: <a style="color: green">${message.text}</a> <img src=${message.author.avatar} style="height: 30px; width: 30px">`
         ).join('<br>');
