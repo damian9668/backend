@@ -31,7 +31,12 @@ const postSchema = new schema.Entity('posts', {
     posts: [mensajeSchema]
 });
 
-
+function login(){
+    let usuario = document.getElementById("login").value;
+   // window.location.replace(`http://localhost:8080/productos/${usuario}`)
+  //  fetch(`http://localhost:8080/productos/nombre=${usuario}`).then();
+    console.log(usuario)
+}
 function enviarProductos (){
     let producto={
         name:name.value,

@@ -1,4 +1,18 @@
 <div class="d-flex flex-column align-items-center">
+    {{#if usuario}}
+        <h1>Logueado {{usuario}}</h1>
+    {{else}}
+        <div class="card w-50">
+            <h1 class="text-center">Login De usuarios</h1>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="name"><b>Ingrese Su Nombre</b></label>
+                    <input id="login" class="form-control" type="text" name="name">
+                </div>
+                <button class="btn btn-success mt-3 mb-5" onclick="login()">Loguear</button>
+            </div>
+        </div>
+    {{/if}}
     <div class="card w-50">
         <h1 class="text-center">Listado De Productos</h1>
         <div class="card-body">

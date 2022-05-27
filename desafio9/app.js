@@ -8,7 +8,11 @@ const { Server: HttpServer } = require('http');
 const normalizr = require('normalizr');
 const normalize = normalizr.normalize;
 const denormalize = normalizr.denormalize;
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const MongoStore = require('connect-mongo');
 
+const advancedOptions = { useNewUrlParser: true, useUnifiedTopology: true };
 const schema = normalizr.schema;
 
 const PORT = 8080;
@@ -34,6 +38,22 @@ app.engine("hbs", engine({
     extname: "hbs"
 }));
 
+app.use(cookieParser());
+
+app.use(session({
+    store: MongoStore.create({
+        mongoUrl: 'mongodb://localhost/sesiones',
+        mongoOptions: advancedOptions
+    }),
+    secret: 'secreto',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 40000
+    }
+}));
+const getSessionName = req => req.session.nombre ?? '';
+
 let productos =[];
 
 app.get("/productos-test",(req,res)=>{
@@ -44,8 +64,14 @@ app.get("/productos-test",(req,res)=>{
     res.render("main",{layout:"index", noProducts: ()=>productos.length===0, haveProducts: ()=>productos.length>0});
 });
 
+app.get("/productos/:nombre",(req,res)=>{
+    res.render("main",{layout:"index", usuario:req.params.nombre});
+    console.log(req.params.nombre);
+});
 app.get("/productos",(req,res)=>{
-    res.render("main",{layout:"index", noProducts: ()=>productos.length===0, haveProducts: ()=>productos.length>0});
+    let user = req.params.nombre
+    res.render("main",{layout:"index", usuario:false});
+    console.log(user);
 });
 
 httpServer.listen(PORT, () => console.log('SERVER ON'));
@@ -56,11 +82,7 @@ contenedorMongo.connect().then().catch((error)=>{
 });
 
 const authorSchema = new schema.Entity('authors');
-
-
 const textSchema = new schema.Entity('text');
-
-
 const mensajeSchema = new schema.Entity('mensaje', {
     author: authorSchema,
     text: [textSchema]
