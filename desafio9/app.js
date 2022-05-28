@@ -26,6 +26,7 @@ const contenedorMongo = new ContenedorMongoDb()
 
 
 const {engine} = require("express-handlebars");
+const exp = require("constants");
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -42,20 +43,20 @@ app.use(cookieParser());
 
 app.use(session({
     store: MongoStore.create({
-        mongoUrl: 'mongodb://localhost/sesiones',
+        mongoUrl: 'mongodb+srv://damian96:zxcv123789@cluster0.jihxsw0.mongodb.net/?retryWrites=true&w=majority',
         mongoOptions: advancedOptions
     }),
     secret: 'secreto',
     resave: false,
     saveUninitialized: false,
     cookie: {
-        maxAge: 40000
+        maxAge: 60000
     }
 }));
-const getSessionName = req => req.session.nombre ?? '';
+//const getSessionName = req => req.session.nombre ?? '';
 
 let productos =[];
-
+let expiro ={};
 app.get("/productos-test",(req,res)=>{
     productos = [];
     for(let i =0; i<5;i++){
@@ -64,16 +65,49 @@ app.get("/productos-test",(req,res)=>{
     res.render("main",{layout:"index", noProducts: ()=>productos.length===0, haveProducts: ()=>productos.length>0});
 });
 
-app.get("/productos/:nombre",(req,res)=>{
-    res.render("main",{layout:"index", usuario:req.params.nombre});
-    console.log(req.params.nombre);
-});
 app.get("/productos",(req,res)=>{
-    let user = req.params.nombre
-    res.render("main",{layout:"index", usuario:false});
-    console.log(user);
-});
+    let usuarioSave;
+    let reload = true
+    let active = true
 
+    if(req.query.logout){
+        usuarioSave = req.query.nombre;
+        req.query.nombre = undefined;
+        reload = false
+        req.session.destroy();
+        active = false;
+        setTimeout(()=>{
+            //console.log("test")
+            req.query.logout = undefined;
+            res.render("main",{layout:"index", usuario:undefined, logout: false, usuario2: undefined});
+        },2000)
+
+    }
+    if(new Date()>expiro){
+        req.query.nombre = undefined;
+        req.query.logout = undefined;
+        reload = false
+        expiro = undefined;
+        req.session.destroy();
+        res.render("main",{layout:"index", usuario:undefined, logout: false, usuario2: undefined});
+    }else if(active){
+        req.session.cookie.maxAge = 60000;
+    }
+    if(req.query.nombre){
+        req.session.nombre = req.query.nombre
+        expiro = req.session.cookie.expires
+        //console.log(expiro);
+       // console.log(req.query.nombre)
+    }
+
+    if(reload){
+        res.render("main",{layout:"index", usuario:req.query.nombre, logout: req.query.logout, usuario2: usuarioSave})
+    }
+
+
+
+
+});
 httpServer.listen(PORT, () => console.log('SERVER ON'));
 
 const messages = [];

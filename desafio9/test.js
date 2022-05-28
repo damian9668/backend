@@ -10,7 +10,7 @@ app.use(cookieParser());
 
 app.use(session({
     store: MongoStore.create({
-        mongoUrl: 'mongodb://localhost/sesiones',
+        mongoUrl: 'mongodb+srv://damian96:zxcv123789@cluster0.jihxsw0.mongodb.net/?retryWrites=true&w=majority',
         mongoOptions: advancedOptions
     }),
     secret: 'secreto',

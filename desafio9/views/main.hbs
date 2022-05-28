@@ -1,6 +1,9 @@
 <div class="d-flex flex-column align-items-center">
     {{#if usuario}}
-        <h1>Logueado {{usuario}}</h1>
+        <h1>Bienvenido {{usuario}}</h1>
+        <button class="btn btn-success mt-3 mb-5" onclick="logout()">Desloguear</button>
+    {{else if logout}}
+        <h1>hasta luego {{usuario2}}</h1>
     {{else}}
         <div class="card w-50">
             <h1 class="text-center">Login De usuarios</h1>
@@ -76,7 +79,6 @@
 
             <button class="btn btn-success mt-3 mb-5" onclick="enviarMensaje()">Enviar Mensaje</button>
             <p></p>
-            <script src="js/index.js"></script>
         </div>
     </div>
 </div>

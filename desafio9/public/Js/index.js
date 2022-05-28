@@ -33,9 +33,17 @@ const postSchema = new schema.Entity('posts', {
 
 function login(){
     let usuario = document.getElementById("login").value;
-   // window.location.replace(`http://localhost:8080/productos/${usuario}`)
-  //  fetch(`http://localhost:8080/productos/nombre=${usuario}`).then();
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set("nombre",usuario);
+    urlParams.delete("logout");
+    window.location.search = urlParams;
     console.log(usuario)
+}
+
+function logout(){
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set("logout",true);
+    window.location.search = urlParams;
 }
 function enviarProductos (){
     let producto={
