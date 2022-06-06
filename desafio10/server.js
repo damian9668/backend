@@ -18,11 +18,17 @@ const app = express();
 const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
 
+ const ContenedorSQL = require("./ContenedorSQL")
+ const ContenedorMongoDb = require("./ContenedorMongo");
+ const {optionsMariaDb,optionsSQL} = require("./mysqlDB");
 
 const normalizr = require('normalizr');
 const normalize = normalizr.normalize;
 const denormalize = normalizr.denormalize;
 const schema = normalizr.schema;
+
+ const contenedorSQL = new ContenedorSQL("productos",optionsMariaDb)
+ const contenedorMongo = new ContenedorMongoDb()
 
 passport.use('login', new LocalStrategy(
     (username, password, done) => {
@@ -149,9 +155,6 @@ controllersdb.conectarDB(config.URL_BASE_DE_DATOS, err => {
 let productos =[];
 
 const messages = [];
-// contenedorMongo.connect().then().catch((error)=>{
-//     console.log(error);
-// });
 
 const authorSchema = new schema.Entity('authors');
 
@@ -177,11 +180,11 @@ io.on('connection', (socket) => {
     socket.on("producto", async producto=>{
         productos.push({name:producto.name,price:producto.price,url:producto.url});
         //console.log(producto);
-        // try {
-        //     await contenedorSQL.guardarProducto(producto);
-        // } catch (e) {
-        //     console.error(e);
-        // }
+        try {
+            await contenedorSQL.guardarProducto(producto);
+        } catch (e) {
+            console.error(e);
+        }
         io.sockets.emit('productos', productos);
     })
 
@@ -203,7 +206,7 @@ io.on('connection', (socket) => {
             text: denormalizedData.text
         });
         contador++;
-        //await contenedorMongo.guardarMensaje(denormalizedData);
+        await contenedorMongo.guardarMensaje(denormalizedData);
         //console.log(messages)
         const normalizedData = normalize(messages, [postSchema]);
         //console.log(normalizedData)
