@@ -153,15 +153,10 @@ controllersdb.conectarDB(config.URL_BASE_DE_DATOS, err => {
 })
 
 let productos =[];
-
 const messages = [];
 
 const authorSchema = new schema.Entity('authors');
-
-
 const textSchema = new schema.Entity('text');
-
-
 const mensajeSchema = new schema.Entity('mensaje', {
     author: authorSchema,
     text: [textSchema]
@@ -169,6 +164,7 @@ const mensajeSchema = new schema.Entity('mensaje', {
 const postSchema = new schema.Entity('posts', {
     posts: [mensajeSchema]
 });
+
 
 let contador = 0;
 io.on('connection', (socket) => {
