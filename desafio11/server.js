@@ -7,7 +7,6 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 
 const routes = require('./routes');
-const config = require('./config');
 const controllersdb = require('./controllersdb');
 const User = require('./models');
 
@@ -26,6 +25,8 @@ const normalizr = require('normalizr');
 const normalize = normalizr.normalize;
 const denormalize = normalizr.denormalize;
 const schema = normalizr.schema;
+require("dotenv").config();
+const parseArgs = require('minimist');
 
  const contenedorSQL = new ContenedorSQL("productos",optionsMariaDb)
  const contenedorMongo = new ContenedorMongoDb()
@@ -99,16 +100,22 @@ app.set('view engine', '.hbs');
 app.use(express.static(__dirname + '/views'));
 app.use(express.urlencoded({ extended: true }));
 
-const port = 8080;
+const options = {
+    default: {puerto: 3000},
+    alias: {p: 'puerto'}
+};
+
+//console.log(parseArgs(process.argv.slice(2), options).puerto);
+const port = parseArgs(process.argv.slice(2), options).puerto;
 
 app.use(session({
-    secret: 'secret',
+    secret: process.env.CLAVE,
     resave: false,
     saveUninitialized: false,
     cookie: {
         httpOnly: false,
         secure: false,
-        maxAge: config.TIEMPO_EXPIRACION
+        maxAge: parseInt(process.env.TIEMPO_EXPIRACION, 10)
     }
 }));
 
@@ -127,6 +134,9 @@ app.get('/signup', routes.getSignup);
 app.post('/signup', passport.authenticate('signup', {failureRedirect: '/failsignup'}), routes.postSignup)
 app.get('/failsignup', routes.getFailsignup);
 
+//INFO
+app.get('/info',routes.systemInfo);
+
 function checkAuthentication(req, res, next) {
     if (req.isAuthenticated()) {
         next();
@@ -142,7 +152,7 @@ app.get('/ruta-protegida', checkAuthentication, (req, res) => {
 
 app.get('/logout', routes.getLogout);
 
-controllersdb.conectarDB(config.URL_BASE_DE_DATOS, err => {
+controllersdb.conectarDB(process.env.URL_BASE_DE_DATOS, err => {
     if (err) return console.log('error bdd')
     console.log('Base de datos conectada');
 
