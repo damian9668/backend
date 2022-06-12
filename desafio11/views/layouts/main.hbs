@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>User</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="/socket.io/socket.io.js"></script>
+<!--    <script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.2/dist/normalizr.browser.min.js"></script>
+</head>
+<body>
+
+    {{{body}}}
+
+<div class="d-flex flex-column align-items-center">
+    <div class="card w-50">
+        <h1 class="text-center">Listado De Productos</h1>
+        <div class="card-body">
+            <div class="form-group">
+                <label for="name"><b>Producto</b></label>
+                <input id="name" class="form-control" type="text" name="name">
+            </div>
+
+            <div class="form-group">
+                <label for="precio"><b>Precio</b></label>
+                <input id="price" class="form-control" type="number" name="price">
+            </div>
+
+            <div class="form-group">
+                <label for="image"><b>URL Imagen</b></label>
+                <input id="url" class="form-control" type="text" name="url">
+            </div>
+            <button class="btn btn-success mt-3 mb-5" onclick="enviarProductos()">Enviar Producto</button>
+        </div>
+    </div>
+    <div class="card w-50">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Imagen</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card w-50">
+        <h1 class="text-center">Centro De Mensajes</h1>
+        <h2 class="text-center"></h2>
+        <div class="card-body">
+            <label for="id"><b>Correo</b></label>
+            <input class="form-control" type="email" id="id" name="correo">
+
+            <label for="userName"><b>Nombre</b></label>
+            <input class="form-control" type="text" id="userName" name="nombre">
+
+            <label for="userApellido"><b>Apellido</b></label>
+            <input class="form-control" type="text" id="userApellido" name="apellido">
+
+            <label for="userEdad"><b>Edad</b></label>
+            <input class="form-control" type="number" id="userEdad" name="edad">
+
+            <label for="userAlias"><b>Alias</b></label>
+            <input class="form-control" type="text" id="userAlias" name="alias">
+
+            <label for="userAvatar"><b>Avatar</b></label>
+            <input class="form-control" type="text" id="userAvatar" name="avatar">
+
+            <label for="mensaje"><b>Mensaje</b></label>
+            <input class="form-control" type="text" id="mensaje" name="mensaje">
+
+            <button class="btn btn-success mt-3 mb-5" onclick="enviarMensaje()">Enviar Mensaje</button>
+            <p></p>
+            <script src="js/index.js"></script>
+        </div>
+    </div>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>
