@@ -136,6 +136,8 @@ app.get('/failsignup', routes.getFailsignup);
 
 //INFO
 app.get('/info',routes.systemInfo);
+//FORK
+app.get('/api/randoms',routes.randoms);
 
 function checkAuthentication(req, res, next) {
     if (req.isAuthenticated()) {

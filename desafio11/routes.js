@@ -1,3 +1,5 @@
+const { fork } = require('child_process');
+
 function getRoot(req, res) {
     res.send('Bienvenido');
 }
@@ -58,6 +60,16 @@ function systemInfo(req,res){
               Memoria: ${process.memoryUsage().rss}
               `)
 }
+function randoms(req,res){
+    const {cant=100000000}=req.query
+
+    const computo = fork("computo.js")
+    computo.send(cant);
+    computo.on("message",(calculo)=>{
+        res.send(calculo)
+    })
+}
+
 
 module.exports = {
     getLogin,
@@ -69,5 +81,6 @@ module.exports = {
     getLogout,
     failRoute,
     getRoot,
-    systemInfo
+    systemInfo,
+    randoms
 }
