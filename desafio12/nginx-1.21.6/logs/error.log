@@ -1,0 +1,27 @@
+2022/06/20 12:55:11 [error] 18068#17840: *1 CreateFile() "F:\Backend\desafio12\nginx-1.21.6/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost", referrer: "http://localhost/"
+2022/06/20 17:09:39 [emerg] 3288#18836: unexpected "}" in F:\Backend\desafio12\nginx-1.21.6/conf/nginx.conf:51
+2022/06/20 17:10:09 [notice] 16880#21020: signal process started
+2022/06/20 17:12:36 [notice] 18668#17352: signal process started
+2022/06/20 17:12:39 [error] 19288#10564: *6 directory index of "F:\Backend\desafio12\public/" is forbidden, client: 127.0.0.1, server: nginx_node, request: "GET / HTTP/1.1", host: "localhost"
+2022/06/20 17:12:41 [error] 19288#10564: *6 directory index of "F:\Backend\desafio12\public/" is forbidden, client: 127.0.0.1, server: nginx_node, request: "GET / HTTP/1.1", host: "localhost"
+2022/06/20 17:17:32 [notice] 9668#18836: signal process started
+2022/06/20 17:17:38 [error] 3696#3576: *9 "F:\Backend\desafio12\nginx-1.21.6/../../public/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: nginx_node, request: "GET / HTTP/1.1", host: "localhost"
+2022/06/20 17:17:54 [notice] 16076#10464: signal process started
+2022/06/20 17:17:56 [error] 3696#3576: *10 "F:\Backend\desafio12\nginx-1.21.6/../../public/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: nginx_node, request: "GET / HTTP/1.1", host: "localhost"
+2022/06/20 17:18:08 [notice] 10744#9448: signal process started
+2022/06/20 17:18:25 [error] 3696#3576: *11 "F:\Backend\desafio12\nginx-1.21.6/../../public/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: nginx_node, request: "GET / HTTP/1.1", host: "localhost"
+2022/06/20 17:18:26 [error] 15456#17232: *12 directory index of "F:\Backend\desafio12\public/" is forbidden, client: 127.0.0.1, server: nginx_node, request: "GET / HTTP/1.1", host: "localhost"
+2022/06/20 17:19:23 [notice] 20108#3084: signal process started
+2022/06/20 17:19:26 [error] 15456#17232: *13 directory index of "F:\Backend\desafio12\public/" is forbidden, client: 127.0.0.1, server: nginx_node, request: "GET / HTTP/1.1", host: "localhost"
+2022/06/20 17:20:59 [error] 21440#20556: *14 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: nginx_node, request: "GET /api/randoms?=20000 HTTP/1.1", upstream: "http://127.0.0.1:8083/api/randoms?=20000", host: "localhost"
+2022/06/20 17:21:01 [error] 21440#20556: *14 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: nginx_node, request: "GET /api/randoms?=20000 HTTP/1.1", upstream: "http://127.0.0.1:8084/api/randoms?=20000", host: "localhost"
+2022/06/20 17:21:03 [error] 21440#20556: *14 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: nginx_node, request: "GET /api/randoms?=20000 HTTP/1.1", upstream: "http://127.0.0.1:8085/api/randoms?=20000", host: "localhost"
+2022/06/20 17:24:36 [notice] 10432#13800: signal process started
+2022/06/20 17:26:35 [notice] 3148#19480: signal process started
+2022/06/20 17:33:28 [notice] 15036#19360: signal process started
+2022/06/20 17:58:30 [notice] 13972#11636: signal process started
+2022/06/20 18:04:12 [error] 2572#22084: *41 CreateFile() "F:\Backend\desafio12\public/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: nginx_node, request: "GET /favicon.ico HTTP/1.1", host: "localhost", referrer: "http://localhost/api/randoms?=200"
+2022/06/20 18:04:53 [error] 2572#22084: *38 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host) while reading response header from upstream, client: 127.0.0.1, server: nginx_node, request: "GET /api/randoms?=200 HTTP/1.1", upstream: "http://127.0.0.1:8085/api/randoms?=200", host: "localhost"
+2022/06/20 18:04:56 [error] 2572#22084: *38 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: nginx_node, request: "GET /api/randoms?=200 HTTP/1.1", upstream: "http://127.0.0.1:8082/api/randoms?=200", host: "localhost"
+2022/06/20 18:04:58 [error] 2572#22084: *38 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: nginx_node, request: "GET /api/randoms?=200 HTTP/1.1", upstream: "http://127.0.0.1:8083/api/randoms?=200", host: "localhost"
+2022/06/20 18:05:00 [error] 2572#22084: *38 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: nginx_node, request: "GET /api/randoms?=200 HTTP/1.1", upstream: "http://127.0.0.1:8084/api/randoms?=200", host: "localhost"
