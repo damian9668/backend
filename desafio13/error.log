@@ -1,0 +1,19 @@
+[2022-07-04T21:15:53.382] [ERROR] archivo3 - test
+[2022-07-04T21:16:11.198] [ERROR] archivo3 - Error: connect ECONNREFUSED 127.0.0.1:3306
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1148:16)
+    --------------------
+    at Protocol._enqueue (F:\Backend\desafio13\node_modules\mysql\lib\protocol\Protocol.js:144:48)
+    at Protocol.handshake (F:\Backend\desafio13\node_modules\mysql\lib\protocol\Protocol.js:51:23)
+    at Connection.connect (F:\Backend\desafio13\node_modules\mysql\lib\Connection.js:116:18)
+    at F:\Backend\desafio13\node_modules\knex\lib\dialects\mysql\index.js:66:18
+    at new Promise (<anonymous>)
+    at Client_MySQL.acquireRawConnection (F:\Backend\desafio13\node_modules\knex\lib\dialects\mysql\index.js:61:12)
+    at create (F:\Backend\desafio13\node_modules\knex\lib\client.js:249:39)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5) {
+  errno: -4078,
+  code: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 3306,
+  fatal: true
+}
