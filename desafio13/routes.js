@@ -51,7 +51,7 @@ function failRoute(req, res) {
     res.status(404).render('routing-error', {});
 }
 function systemInfo(req,res){
-   // console.log(process.memoryUsage())
+    //console.log(process.cwd(),process.argv[0],process.pid,process.argv.slice(2),process.version,process.env.OS,process.memoryUsage().rss,os.cpus().length);
     res.send(`Carpeta Del Proyecto: ${process.cwd()}<br>
               Carpeta De Ejecucion: ${process.argv[0]}<br>
               Id Del Proceso: ${process.pid}<br>

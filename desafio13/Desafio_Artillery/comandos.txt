@@ -1,0 +1,4 @@
+node --prof server.js
+artillery quick --count 20 -n 50 "http://localhost:3000/info" > result_artillery.txt
+node --prof-process profile-v8.log>result_log.txt
+

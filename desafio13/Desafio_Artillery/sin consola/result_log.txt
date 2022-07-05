@@ -1,0 +1,33 @@
+Statistical profiling result from profile-v8.log, (28891 ticks, 0 unaccounted, 0 excluded).
+
+ [Shared libraries]:
+   ticks  total  nonlib   name
+  28686   99.3%          C:\WINDOWS\SYSTEM32\ntdll.dll
+    203    0.7%          C:\Program Files\nodejs\node.exe
+
+ [JavaScript]:
+   ticks  total  nonlib   name
+      1    0.0%   50.0%  LazyCompile: *resolve path.js:153:10
+      1    0.0%   50.0%  LazyCompile: *hidden internal/errors.js:306:25
+
+ [C++]:
+   ticks  total  nonlib   name
+
+ [Summary]:
+   ticks  total  nonlib   name
+      2    0.0%  100.0%  JavaScript
+      0    0.0%    0.0%  C++
+      9    0.0%  450.0%  GC
+  28889  100.0%          Shared libraries
+
+ [C++ entry points]:
+   ticks    cpp   total   name
+
+ [Bottom up (heavy) profile]:
+  Note: percentage shows a share of a particular caller in the total
+  amount of its parent calls.
+  Callers occupying less than 1.0% are not shown.
+
+   ticks parent  name
+  28686   99.3%  C:\WINDOWS\SYSTEM32\ntdll.dll
+

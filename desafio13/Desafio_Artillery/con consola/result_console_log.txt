@@ -1,0 +1,112 @@
+Statistical profiling result from profile-console-v8.log, (5076 ticks, 0 unaccounted, 0 excluded).
+
+ [Shared libraries]:
+   ticks  total  nonlib   name
+   4861   95.8%          C:\WINDOWS\SYSTEM32\ntdll.dll
+    211    4.2%          C:\Program Files\nodejs\node.exe
+
+ [JavaScript]:
+   ticks  total  nonlib   name
+      1    0.0%   25.0%  LazyCompile: *next F:\Backend\desafio13\node_modules\express\lib\router\index.js:177:16
+      1    0.0%   25.0%  LazyCompile: *formatWithOptionsInternal internal/util/inspect.js:1861:35
+      1    0.0%   25.0%  LazyCompile: *asString F:\Backend\desafio13\node_modules\date-format\lib\index.js:29:18
+      1    0.0%   25.0%  LazyCompile: *Module._findPath internal/modules/cjs/loader.js:461:28
+
+ [C++]:
+   ticks  total  nonlib   name
+
+ [Summary]:
+   ticks  total  nonlib   name
+      4    0.1%  100.0%  JavaScript
+      0    0.0%    0.0%  C++
+     11    0.2%  275.0%  GC
+   5072   99.9%          Shared libraries
+
+ [C++ entry points]:
+   ticks    cpp   total   name
+
+ [Bottom up (heavy) profile]:
+  Note: percentage shows a share of a particular caller in the total
+  amount of its parent calls.
+  Callers occupying less than 1.0% are not shown.
+
+   ticks parent  name
+   4861   95.8%  C:\WINDOWS\SYSTEM32\ntdll.dll
+
+    211    4.2%  C:\Program Files\nodejs\node.exe
+    156   73.9%    C:\Program Files\nodejs\node.exe
+     68   43.6%      LazyCompile: ~handleWriteReq internal/stream_base_commons.js:47:24
+     68  100.0%        LazyCompile: ~writeGeneric internal/stream_base_commons.js:143:22
+     68  100.0%          LazyCompile: ~Socket._writeGeneric net.js:761:42
+     68  100.0%            LazyCompile: ~Socket._write net.js:798:35
+     15    9.6%      LazyCompile: ~wrapSafe internal/modules/cjs/loader.js:973:18
+     15  100.0%        LazyCompile: ~Module._compile internal/modules/cjs/loader.js:1026:37
+     15  100.0%          LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1081:37
+     15  100.0%            LazyCompile: ~Module.load internal/modules/cjs/loader.js:925:33
+      8    5.1%      LazyCompile: ~stat internal/modules/cjs/loader.js:145:14
+      4   50.0%        LazyCompile: ~tryFile internal/modules/cjs/loader.js:351:17
+      4  100.0%          LazyCompile: ~tryExtensions internal/modules/cjs/loader.js:367:23
+      3   75.0%            LazyCompile: ~Module._findPath internal/modules/cjs/loader.js:461:28
+      1   25.0%            LazyCompile: ~tryPackage internal/modules/cjs/loader.js:305:20
+      4   50.0%        LazyCompile: ~Module._findPath internal/modules/cjs/loader.js:461:28
+      4  100.0%          LazyCompile: ~Module._resolveFilename internal/modules/cjs/loader.js:804:35
+      4  100.0%            LazyCompile: ~Module._load internal/modules/cjs/loader.js:724:24
+      6    3.8%      LazyCompile: ~realpathSync fs.js:1718:22
+      6  100.0%        LazyCompile: ~toRealPath internal/modules/cjs/loader.js:360:20
+      5   83.3%          LazyCompile: ~tryFile internal/modules/cjs/loader.js:351:17
+      5  100.0%            LazyCompile: ~tryExtensions internal/modules/cjs/loader.js:367:23
+      1   16.7%          LazyCompile: ~Module._findPath internal/modules/cjs/loader.js:461:28
+      1  100.0%            LazyCompile: ~Module._resolveFilename internal/modules/cjs/loader.js:804:35
+      4    2.6%      LazyCompile: ~readSync fs.js:577:18
+      4  100.0%        LazyCompile: ~tryReadSync fs.js:379:21
+      4  100.0%          LazyCompile: ~readFileSync fs.js:391:22
+      4  100.0%            LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1081:37
+      4    2.6%      LazyCompile: ~cpus os.js:133:14
+      4  100.0%        LazyCompile: ~systemInfo F:\Backend\desafio13\routes.js:53:20
+      4  100.0%          LazyCompile: ~handle F:\Backend\desafio13\node_modules\express\lib\router\layer.js:86:49
+      4  100.0%            LazyCompile: ~next F:\Backend\desafio13\node_modules\express\lib\router\route.js:116:16
+      3    1.9%      LazyCompile: ~compileForInternalLoader internal/bootstrap/loaders.js:273:27
+      3  100.0%        LazyCompile: ~nativeModuleRequire internal/bootstrap/loaders.js:306:29
+      1   33.3%          LazyCompile: ~setupProcessObject internal/bootstrap/node.js:273:28
+      1  100.0%            Eval: ~<anonymous> internal/bootstrap/node.js:1:1
+      1   33.3%          Eval: ~<anonymous> internal/url.js:1:1
+      1  100.0%            LazyCompile: ~compileForInternalLoader internal/bootstrap/loaders.js:273:27
+      1   33.3%          Eval: ~<anonymous> internal/source_map/source_map_cache.js:1:1
+      1  100.0%            LazyCompile: ~compileForInternalLoader internal/bootstrap/loaders.js:273:27
+      3    1.9%      C:\Program Files\nodejs\node.exe
+      1   33.3%        LazyCompile: ~resolvePackageTargetString internal/modules/esm/resolve.js:326:36
+      1  100.0%          LazyCompile: ~resolvePackageTarget internal/modules/esm/resolve.js:380:30
+      1  100.0%            LazyCompile: ~resolvePackageTarget internal/modules/esm/resolve.js:380:30
+      1   33.3%        LazyCompile: ~checkIsHttpToken _http_common.js:219:26
+      1  100.0%          LazyCompile: ~<anonymous> _http_outgoing.js:543:44
+      1  100.0%            LazyCompile: *hidden internal/errors.js:306:25
+      1   33.3%        LazyCompile: *asString F:\Backend\desafio13\node_modules\date-format\lib\index.js:29:18
+      1  100.0%          LazyCompile: ~timestampLevelAndCategory F:\Backend\desafio13\node_modules\log4js\lib\layouts.js:42:35
+      1  100.0%            LazyCompile: ~basicLayout F:\Backend\desafio13\node_modules\log4js\lib\layouts.js:63:21
+      2    1.3%      LazyCompile: ~writevGeneric internal/stream_base_commons.js:118:23
+      2  100.0%        LazyCompile: ~Socket._writeGeneric net.js:761:42
+      2  100.0%          LazyCompile: ~Socket._writev net.js:793:36
+      2  100.0%            LazyCompile: ~doWrite internal/streams/writable.js:367:17
+      2    1.3%      LazyCompile: ~resume_ internal/streams/readable.js:955:17
+      2  100.0%        LazyCompile: *processTicksAndRejections internal/process/task_queues.js:67:35
+      2    1.3%      LazyCompile: ~readPackage internal/modules/cjs/loader.js:257:21
+      2  100.0%        LazyCompile: ~resolveExports internal/modules/cjs/loader.js:439:24
+      2  100.0%          LazyCompile: ~Module._findPath internal/modules/cjs/loader.js:461:28
+      2  100.0%            LazyCompile: ~Module._resolveFilename internal/modules/cjs/loader.js:804:35
+      2    1.3%      LazyCompile: ~getColorDepth internal/tty.js:109:23
+      2  100.0%        LazyCompile: ~value internal/console/constructor.js:300:20
+      2  100.0%          LazyCompile: ~value internal/console/constructor.js:321:20
+      2  100.0%            LazyCompile: ~log internal/console/constructor.js:357:6
+      2    1.3%      LazyCompile: ~Hash internal/crypto/hash.js:37:14
+      2  100.0%        LazyCompile: ~createHash crypto.js:115:20
+      1   50.0%          LazyCompile: ~hash F:\Backend\desafio13\node_modules\express-session\index.js:596:14
+      1  100.0%            LazyCompile: ~isModified F:\Backend\desafio13\node_modules\express-session\index.js:425:24
+      1   50.0%          LazyCompile: ~entitytag F:\Backend\desafio13\node_modules\etag\index.js:39:20
+      1  100.0%            LazyCompile: ~etag F:\Backend\desafio13\node_modules\etag\index.js:70:15
+      2    1.3%      LazyCompile: *asString F:\Backend\desafio13\node_modules\date-format\lib\index.js:29:18
+      2  100.0%        LazyCompile: ~timestampLevelAndCategory F:\Backend\desafio13\node_modules\log4js\lib\layouts.js:42:35
+      1   50.0%          LazyCompile: ~colouredLayout F:\Backend\desafio13\node_modules\log4js\lib\layouts.js:71:24
+      1  100.0%            LazyCompile: ~<anonymous> F:\Backend\desafio13\node_modules\log4js\lib\appenders\console.js:5:10
+      1   50.0%          LazyCompile: ~basicLayout F:\Backend\desafio13\node_modules\log4js\lib\layouts.js:63:21
+      1  100.0%            LazyCompile: ~app F:\Backend\desafio13\node_modules\log4js\lib\appenders\file.js:70:24
+

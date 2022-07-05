@@ -1,0 +1,2 @@
+node --inspect server.js
+artillery quick --count 20 -n 50 "http://localhost:3000/info" > result_artillery.txt
