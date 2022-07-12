@@ -1,5 +1,4 @@
 const socket = io();
-//const normalizr = require("normalizr");
 const normalize = normalizr.normalize;
 const denormalize = normalizr.denormalize;
 
@@ -33,6 +32,7 @@ const postSchema = new schema.Entity('posts', {
 
 
 function enviarProductos (){
+    //console.log("test")
     let producto={
         name:name.value,
         price: price.value,

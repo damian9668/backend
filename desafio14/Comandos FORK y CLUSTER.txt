@@ -1,0 +1,38 @@
+CLUSTER y FORK node 
+node server.js -p 8080 -m FORK
+node server.js -p 8080 -m CLUSTER
+
+CLUSTER y FORK nodemon
+nodemon server.js -p 8080 -m CLUSTER
+nodemon server.js -p 8080 -m FORK
+
+CLUSTER y FORK forever
+forever start server.js -c "-p 8080" 
+forever list
+forever stopall
+forever start server.js -c "-p 8080 -m CLUSTER"
+forever list
+forever stopall
+
+CLUSTER y FORK PM2
+pm2 start server.js --name="serverFork" -- -p 8080
+pm2 list
+pm2 delete all
+pm2 start server.js --name="serverCluster" --watch -i max -- -p 8081
+pm2 list
+pm2 delete all
+
+NGINX
+CLUSTER
+se agrega en conf sentencia de conf
+"server 127.0.0.1:8081"
+ejecutar "pm2 start server.js --name="serverCluster" --watch -i max -- -p 8081"
+
+FORK
+se elimina sentencia anterior de conf y se agrega las sentencias correspondientes, luego
+ejecutar con pm2:
+
+pm2 start server.js --name="serverFork1" -- -p 8082
+pm2 start server.js --name="serverFork2" -- -p 8083
+pm2 start server.js --name="serverFork3" -- -p 8084
+pm2 start server.js --name="serverFork4" -- -p 8085

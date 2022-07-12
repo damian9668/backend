@@ -1,3 +1,6 @@
+const { fork } = require('child_process');
+const os = require('os');
+
 function getRoot(req, res) {
     res.send('Bienvenido');
 }
@@ -47,6 +50,28 @@ function getLogout(req, res) {
 function failRoute(req, res) {
     res.status(404).render('routing-error', {});
 }
+function systemInfo(req,res){
+   // console.log(process.memoryUsage())
+    res.send(`Carpeta Del Proyecto: ${process.cwd()}<br>
+              Carpeta De Ejecucion: ${process.argv[0]}<br>
+              Id Del Proceso: ${process.pid}<br>
+              Argumentos: ${process.argv.slice(2)}<br>
+              Versión De Node: ${process.version}<br>
+              Sistema Operativo: ${process.env.OS}<br>
+              Memoria: ${process.memoryUsage().rss}<br>
+              CPU: ${os.cpus().length}
+              `)
+}
+function randoms(req,res){
+    const {cant=100000000}=req.query
+
+    const computo = fork("computo.js")
+    computo.send(cant);
+    computo.on("message",(calculo)=>{
+        res.send(calculo)
+    })
+}
+
 
 module.exports = {
     getLogin,
@@ -57,5 +82,7 @@ module.exports = {
     getFailsignup,
     getLogout,
     failRoute,
-    getRoot
+    getRoot,
+    systemInfo,
+    randoms
 }
