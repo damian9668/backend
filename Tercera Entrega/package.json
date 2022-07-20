@@ -17,6 +17,7 @@
     "express-handlebars": "^5.3.3",
     "express-session": "^1.17.3",
     "knex": "^2.1.0",
+    "log4js": "^6.6.0",
     "minimist": "^1.2.6",
     "mongoose": "^6.0.5",
     "mysql": "^2.18.1",
@@ -26,7 +27,8 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "socket.io": "^4.5.1",
-    "socket.io-client": "^4.5.1"
+    "socket.io-client": "^4.5.1",
+    "twilio": "^3.79.0"
   },
   "engines": {
     "npm": "6.14.15"

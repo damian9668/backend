@@ -11,95 +11,44 @@
 <body>
 
     {{{body}}}
+    <div class="d-flex flex-column align-items-center">
+        <div class="card w-50">
+            <h1 class="text-center">Listado De Productos</h1>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Imagen</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-<div class="d-flex flex-column align-items-center">
-<!--    <div class="card w-50">-->
-<!--        <h1 class="text-center">Listado De Productos</h1>-->
-<!--        <div class="card-body">-->
-<!--            <div class="form-group">-->
-<!--                <label for="name"><b>Producto</b></label>-->
-<!--                <input id="name" class="form-control" type="text" name="name">-->
-<!--            </div>-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--    Carrito-->
+        <div class="card w-50">
+            <h1 class="text-center">Carrito</h1>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Precio</th>
+                    </tr>
+                    </thead>
+                    <tbody id="carrito">
 
-<!--            <div class="form-group">-->
-<!--                <label for="precio"><b>Precio</b></label>-->
-<!--                <input id="price" class="form-control" type="number" name="price">-->
-<!--            </div>-->
-
-<!--            <div class="form-group">-->
-<!--                <label for="image"><b>URL Imagen</b></label>-->
-<!--                <input id="url" class="form-control" type="text" name="url">-->
-<!--            </div>-->
-<!--            <button class="btn btn-success mt-3 mb-5" onclick="enviarProductos()">Enviar Producto</button>-->
-<!--        </div>-->
-<!--    </div>-->
-    <div class="card w-50">
-        <h1 class="text-center">Listado De Productos</h1>
-        <div class="card-body">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Producto</th>
-                    <th scope="col">Precio</th>
-                    <th scope="col">Imagen</th>
-                    <th scope="col">Acciones</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+                <button class="btn btn-success mt-3 mb-5" onclick="enviarPedido()">Enviar Orden</button>
+            </div>
         </div>
     </div>
-<!--    Carrito-->
-    <div class="card w-50">
-        <h1 class="text-center">Carrito</h1>
-        <div class="card-body">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Producto</th>
-                    <th scope="col">Precio</th>
-                </tr>
-                </thead>
-                <tbody id="carrito">
-
-                </tbody>
-            </table>
-            <button></button>
-        </div>
-    </div>
-<!--    <div class="card w-50">-->
-<!--        <h1 class="text-center">Centro De Mensajes</h1>-->
-<!--        <h2 class="text-center"></h2>-->
-<!--        <div class="card-body">-->
-<!--            <label for="id"><b>Correo</b></label>-->
-<!--            <input class="form-control" type="email" id="id" name="correo">-->
-
-<!--            <label for="userName"><b>Nombre</b></label>-->
-<!--            <input class="form-control" type="text" id="userName" name="nombre">-->
-
-<!--            <label for="userApellido"><b>Apellido</b></label>-->
-<!--            <input class="form-control" type="text" id="userApellido" name="apellido">-->
-
-<!--            <label for="userEdad"><b>Edad</b></label>-->
-<!--            <input class="form-control" type="number" id="userEdad" name="edad">-->
-
-<!--            <label for="userAlias"><b>Alias</b></label>-->
-<!--            <input class="form-control" type="text" id="userAlias" name="alias">-->
-
-<!--            <label for="userAvatar"><b>Avatar</b></label>-->
-<!--            <input class="form-control" type="text" id="userAvatar" name="avatar">-->
-
-<!--            <label for="mensaje"><b>Mensaje</b></label>-->
-<!--            <input class="form-control" type="text" id="mensaje" name="mensaje">-->
-
-<!--            <button class="btn btn-success mt-3 mb-5" onclick="enviarMensaje()">Enviar Mensaje</button>-->
-<!--            <p></p>-->
-<!--            <script src="js/index.js"></script>-->
-<!--        </div>-->
-<!--    </div>-->
-</div>
     <script src="js/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>

@@ -1,6 +1,7 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const bCrypt = require('bcrypt');
+const log4js = require('log4js');
 
 const session = require('express-session');
 const passport = require('passport');
@@ -14,6 +15,7 @@ const { Server: IOServer } = require('socket.io');
 const { Server: HttpServer } = require('http');
 
 const app = express();
+app.use(express.json());
 const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
 
@@ -36,13 +38,34 @@ const numCpu = require('os').cpus().length
 
 let path = require('path')
 
-const emailSender = 'damian.ullmann@gmail.com'
-const apiKey = "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"
+const emailSender = 'damian.ullmann@hotmail.com'
+const apiKey = process.env.twilio_email
 //process.env.PWD = process.cwd();
 app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use(express.static( 'public'));
 //app.use(express.static(path.join(__dirname, './public')));
+
+log4js.configure({
+    appenders: {
+        miLoggerConsole: { type: 'console' },
+        miLoggerFile1: { type: 'file', filename: 'info.log' },
+        miLoggerFile2: { type: 'file', filename: 'warn.log' },
+        miLoggerFile3: { type: 'file', filename: 'error.log' },
+    },
+    categories: {
+        default: { appenders: ['miLoggerConsole'], level: 'trace' },
+        consola: { appenders: ['miLoggerConsole'], level: 'all' },
+        archivo: { appenders: ['miLoggerFile1'], level: 'info' },
+        archivo2: { appenders: ['miLoggerFile2'], level: 'warn' },
+        archivo3: { appenders: ['miLoggerFile3'], level: 'error' },
+        todos: { appenders: ['miLoggerConsole', 'miLoggerFile1', 'miLoggerFile2','miLoggerFile3'], level: 'error' }
+    }
+});
+const loggerInfo = log4js.getLogger('archivo');
+const loggerWarn = log4js.getLogger('archivo2');
+const loggerError = log4js.getLogger('archivo3');
+const loggerConsola = log4js.getLogger('consola');
 
 passport.use('login', new LocalStrategy(
     (username, password, done) => {
@@ -66,6 +89,7 @@ passport.use('signup', new LocalStrategy({
 }, (req, username, password, done) => {
     User.findOne({ 'email': username }, (err, user) => {
         if (err) {
+            loggerInfo.info(err);
             return done(err);
         }
         if (user) {
@@ -88,6 +112,7 @@ passport.use('signup', new LocalStrategy({
 
         User.create(newUser, (err, userWithId) => {
             if (err) {
+                loggerInfo.info(err);
                 return done(err);
             }
 
@@ -176,6 +201,8 @@ app.get('/failsignup', routes.getFailsignup);
 app.get('/info',routes.systemInfo);
 //FORK
 app.get('/api/randoms',routes.randoms);
+//CARRITO
+app.post('/carrito',routes.carrito);
 
 function checkAuthentication(req, res, next) {
     if (req.isAuthenticated()) {
@@ -198,7 +225,7 @@ app.get('/logout', routes.getLogout);
 
 //ContenedorMongoDb.connect();
 controllersdb.conectarDB(process.env.URL_BASE_DE_DATOS, err => {
-    if (err) return console.log('error bdd',err)
+    if (err) return loggerError.error(err);
     console.log('Base de datos conectada');
 })
 if(modo === "CLUSTER"){
@@ -215,14 +242,14 @@ if(modo === "CLUSTER"){
         });
     } else {
         httpServer.listen(port, (err) => {
-            if (err) return console.log('error en listen server');
+            if (err) return loggerError.error(err);;
             console.log('Server running ' + port);
         })
         console.log(`Worker ${process.pid} started`);
     }
 }else{
     httpServer.listen(port, (err) => {
-        if (err) return console.log('error en listen server');
+        if (err) return loggerError.error(err);
         console.log('Server running '+port);
     })
 }
@@ -246,7 +273,7 @@ io.on('connection', async(socket) => {
     console.log('Usuario conectado');
     productos = await contenedorSQL.listarAll();
     // Envio de mensaje
-    socket.emit('messages', messages);
+   // socket.emit('messages', messages);
     socket.emit('productos', productos);
 
     socket.on("producto", async producto=>{
@@ -260,29 +287,29 @@ io.on('connection', async(socket) => {
         io.sockets.emit('productos', productos);
     })
 
-    socket.on('message', async data => {
-
-        const denormalizedData = denormalize(data.result, mensajeSchema, data.entities);
-        //console.log(denormalizedData);
-
-        messages.push({
-            id:"mensaje"+contador,
-            author:{
-                id: denormalizedData.author.id,
-                nombre: denormalizedData.author.nombre,
-                apellido: denormalizedData.author.apellido,
-                edad: denormalizedData.author.edad,
-                alias: denormalizedData.author.alias,
-                avatar: denormalizedData.author.avatar,
-            },
-            text: denormalizedData.text
-        });
-        contador++;
-        await contenedorMongo.guardarMensaje(denormalizedData);
-        //console.log(messages)
-        const normalizedData = normalize(messages, [postSchema]);
-        //console.log(normalizedData)
-        io.sockets.emit('messages', normalizedData);
-    });
+    // socket.on('message', async data => {
+    //
+    //     const denormalizedData = denormalize(data.result, mensajeSchema, data.entities);
+    //     //console.log(denormalizedData);
+    //
+    //     messages.push({
+    //         id:"mensaje"+contador,
+    //         author:{
+    //             id: denormalizedData.author.id,
+    //             nombre: denormalizedData.author.nombre,
+    //             apellido: denormalizedData.author.apellido,
+    //             edad: denormalizedData.author.edad,
+    //             alias: denormalizedData.author.alias,
+    //             avatar: denormalizedData.author.avatar,
+    //         },
+    //         text: denormalizedData.text
+    //     });
+    //     contador++;
+    //     await contenedorMongo.guardarMensaje(denormalizedData);
+    //     //console.log(messages)
+    //     const normalizedData = normalize(messages, [postSchema]);
+    //     //console.log(normalizedData)
+    //     io.sockets.emit('messages', normalizedData);
+    // });
 
 });

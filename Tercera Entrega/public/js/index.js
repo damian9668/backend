@@ -46,40 +46,40 @@ const postSchema = new schema.Entity('posts', {
 //     }
 // }
 
-function enviarMensaje(){
-    let fecha = Date()
-
-    let mensaje = {
-        id:"mensaje",
-        author:{
-            id: correo.value,
-            nombre: nombre.value,
-            apellido: apellido.value,
-            edad: edad.value,
-            alias: alias.value,
-            avatar: avatar.value,
-        },
-        text: datos.value
-    }
-    if(mensaje.author.id && mensaje.text){
-        const normalizedData = normalize(mensaje, mensajeSchema);
-       // console.log(normalizedData);
-        socket.emit('message', normalizedData);
-        document.getElementById("mensaje").value = ""
-    }
-
-}
+// function enviarMensaje(){
+//     let fecha = Date()
+//
+//     let mensaje = {
+//         id:"mensaje",
+//         author:{
+//             id: correo.value,
+//             nombre: nombre.value,
+//             apellido: apellido.value,
+//             edad: edad.value,
+//             alias: alias.value,
+//             avatar: avatar.value,
+//         },
+//         text: datos.value
+//     }
+//     if(mensaje.author.id && mensaje.text){
+//         const normalizedData = normalize(mensaje, mensajeSchema);
+//        // console.log(normalizedData);
+//         socket.emit('message', normalizedData);
+//         document.getElementById("mensaje").value = ""
+//     }
+//
+// }
 
 socket.on('productos', productos => {
     const htmlProductos = productos.map(
-        producto => `<td id="${producto.id}-name">${producto.name}</td><td id="${producto.id}-price">$${producto.price}</td><td id="${producto.id}-url"><img src=${producto.url} style="height: 60px; width: 60px"></td><td><button id="${producto.id}" onclick="addCarrito(this)">Añadir</button></td>`
+        producto => `<td id="${producto.id}-name">${producto.name}</td><td id="${producto.id}-price">$${producto.price}</td><td id="${producto.id}-url"><img src=${producto.url} style="height: 60px; width: 60px"></td><td><button class="btn btn-success mt-3 mb-5" id="${producto.id}" onclick="addCarrito(this)">Añadir</button></td>`
     ).join('<tr>');
     document.querySelector('tbody').innerHTML = htmlProductos;
 });
 let productosCarrito = [];
 
 const addCarrito=(producto)=>{
-    console.log(producto.id);
+    //console.log(producto.id);
 
     const name = document.getElementById(`${producto.id}-name`).innerText
     const price = document.getElementById(`${producto.id}-price`).innerText
@@ -89,21 +89,31 @@ const addCarrito=(producto)=>{
     tr.innerHTML = `<td>${name}</td><td>${price}</td>`
     document.getElementById('carrito').append(tr);
 
-    console.log(producto.id)
+    //console.log(producto.id)
 }
 
-socket.on('messages', messages => {
-    const denormalizedData = denormalize(messages.result, [postSchema], messages.entities);
-    if (denormalizedData){
-        let a = JSON.stringify(messages).length;
-        let b = JSON.stringify(denormalizedData).length;
-        let compresion = (b * 100)/a;
-        //console.log(compresion);
-        document.querySelector('h2').innerHTML = "Compresión: "+compresion;
-        const htmlMessages = denormalizedData.map(
-            message => `<a style="color: blue">${message.author.id}</a>: <a style="color: green">${message.text}</a> <img src=${message.author.avatar} style="height: 30px; width: 30px">`
-        ).join('<br>');
-        document.querySelector('p').innerHTML = htmlMessages;
-    }
+const enviarPedido=async()=>{
+    console.log(productosCarrito);
+    await fetch('/carrito',{
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        method:'POST',body:JSON.stringify(productosCarrito)
+    })
+}
+// socket.on('messages', messages => {
+//     const denormalizedData = denormalize(messages.result, [postSchema], messages.entities);
+//     if (denormalizedData){
+//         let a = JSON.stringify(messages).length;
+//         let b = JSON.stringify(denormalizedData).length;
+//         let compresion = (b * 100)/a;
+//         //console.log(compresion);
+//         document.querySelector('h2').innerHTML = "Compresión: "+compresion;
+//         const htmlMessages = denormalizedData.map(
+//             message => `<a style="color: blue">${message.author.id}</a>: <a style="color: green">${message.text}</a> <img src=${message.author.avatar} style="height: 30px; width: 30px">`
+//         ).join('<br>');
+//         document.querySelector('p').innerHTML = htmlMessages;
+//     }
 
-});
+//});
