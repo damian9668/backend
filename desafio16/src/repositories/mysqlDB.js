@@ -2,11 +2,11 @@
 const optionsMariaDb = {
     client:"mysql2",
     connection:{
-        host: "containers-us-west-84.railway.app",
-        port: 7031,
-        user: "root",
-        password: "AmgfvdGsvM7njeK7F7FM",
-        database: "railway"
+        host: process.env.railwayhost,
+        port: process.env.railwayport,
+        user: process.env.railwayuser,
+        password: process.env.railwaypass,
+        database: process.env.railwaydatabase
 
     }
 }

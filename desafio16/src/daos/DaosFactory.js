@@ -1,14 +1,14 @@
-const {DaoProductos} = require("./DaoProductos")
+const {DaoProductos, getInstance} = require("./DaoProductos")
 
 class DaosFactory {
 
-    async getDao (daoName){
+    getDao (daoName){
         switch(daoName){
             case "producto":
-                DaoProductos.getInstance()
-                break;
+              return getInstance()
             default:
                 throw new Error("DAO Not Implemented");
         }
     }
 }
+module.exports = DaosFactory;

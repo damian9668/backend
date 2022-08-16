@@ -1,18 +1,19 @@
-import SQLConnector from "./connectors/SQLConnector";
+const SQLConnector = require ("./connectors/SQLConnector")
+const {optionsMariaDb} = require("../repositories/mysqlDB");
 
 let instance = null;
 
+const getInstance=()=>{
+    if(!instance){
+        instance=new DaoProductos("productos",optionsMariaDb)
+    }
+    return instance;
+}
+
 class DaoProductos extends SQLConnector{
 
-    constructor() {
-        super();
-    }
-
-    static getInstance(){
-      if(!instance){
-          instance=new DaoProductos()
-      }
-      return instance;
+    constructor(tabla,config) {
+        super(tabla,config);
     }
 
     async listar(id){
@@ -49,4 +50,4 @@ class DaoProductos extends SQLConnector{
     }
 }
 
-module.exports = DaoProductos
+module.exports = {DaoProductos, getInstance}
