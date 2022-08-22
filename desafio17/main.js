@@ -39,6 +39,7 @@ const {testRouter} = require("./src/routes/test");
 const {authenticationRouter} = require("./src/routes/authentication");
 const {rootRouter} = require("./src/routes/root");
 const {serverPassport} = require("./src/config/passport");
+const {productosRouter} = require("./src/routes/productos");
 
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -96,6 +97,8 @@ app.use(authenticationRouter);
 app.use(testRouter);
 
 app.use(logoutRouter);
+
+app.use(productosRouter);
 
 if(modo === "CLUSTER"){
     if (cluster.isMaster) {
