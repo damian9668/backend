@@ -1,4 +1,11 @@
+console.log({
+    host: process.env.railwayhost,
+    port: process.env.railwayport,
+    user: process.env.railwayuser,
+    password: process.env.railwaypass,
+    database: process.env.railwaydatabase
 
+});
 const optionsMariaDb = {
     client:"mysql2",
     connection:{

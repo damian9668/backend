@@ -5,7 +5,7 @@ const sgMail = require("@sendgrid/mail");
 const bCrypt = require("bcrypt");
 const {loggerInfo} = require("./logger")
 
-const emailSender = 'damian.ullmann@hotmail.com'
+const emailSender = process.env.twilio_sender
 const apiKey = process.env.twilio_email
 function serverPassport(){
     passport.use('login', new LocalStrategy(

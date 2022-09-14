@@ -13,7 +13,7 @@ const addCarrito=(producto)=>{
 
     const name = document.getElementById(`${producto.id}-name`).innerText
     const price = document.getElementById(`${producto.id}-price`).innerText
-    console.log(name,price);
+   // console.log(name,price);
     productosCarrito.push({name,price});
     const tr = document.createElement("tr");
     tr.innerHTML = `<td>${name}</td><td>${price}</td>`
