@@ -1,0 +1,43 @@
+<div style="display: flex; justify-content: center; align-content: center; margin: 0; align-items: center; height: 100%">
+    <form action="/login" method="post">
+        <h1 style="text-align: center">Login</h1>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Email</span>
+            <input onkeyup="checkInput(event)" id="username" name="username" type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="email">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Password</span>
+            <input onkeyup="checkInput(event)" id="password" name="password" type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password">
+        </div>
+        <div id="full" class="alert alert-danger" style="text-align: center" role="alert">
+            Revise que todos los campos <br> esten completos.
+        </div>
+        <button disabled id="submitButton" type="submit" class="btn btn-outline-dark w-100">Entrar</button>
+        <div style="display: flex; justify-content: center">
+            <a href="/register">No tenes cuenta?</a>
+        </div>
+    </form>
+</div>
+
+<script>
+
+    const observables = {
+        email: document.getElementById('email'),
+        password: document.getElementById('password'),
+    }
+
+    const validations = {}
+
+    const checkInput = (event) => {
+        validations[event.target.name] = String(event.target.value).trim() !== '';
+
+        if(!(Object.keys(validations).length === 2 && Object.values(validations).every((value) => value))) {
+            document.getElementById('full').style.display = ''
+            document.getElementById('submitButton').disabled = true;
+        } else {
+            document.getElementById('full').style.display = 'none'
+            document.getElementById('submitButton').disabled = false;
+        }
+    }
+
+</script>

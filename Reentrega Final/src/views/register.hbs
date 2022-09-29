@@ -1,0 +1,60 @@
+<div style="display: flex; justify-content: center; align-content: center; margin: 0; align-items: center; height: 100%">
+    <form action="/register" method="post">
+        <h1 style="text-align: center">Register</h1>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Nombre completo</span>
+            <input onkeyup="checkInput(event)" id="name" name="name" type="text" class="form-control" placeholder="Nombre completo"
+                   aria-label="Nombre completo" aria-describedby="name">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Email</span>
+            <input onkeyup="checkInput(event)" id="email" name="email" type="text" class="form-control" placeholder="Email" aria-label="Email"
+                   aria-describedby="email">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Telefono</span>
+            <input onkeyup="checkInput(event)" id="phone" name="phone" type="text" class="form-control" placeholder="Telefono" aria-label="Telefono"
+                   aria-describedby="phone">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Password</span>
+            <input onkeyup="checkInput(event)" id="password" name="password" type="password" class="form-control" placeholder="Password"
+                   aria-label="Password" aria-describedby="password">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Password check</span>
+            <input onkeyup="checkInput(event)" id="passwordCheck" name="passwordCheck" type="password" class="form-control" placeholder="Password"
+                   aria-label="Password" aria-describedby="passwordCheck">
+        </div>
+        <div id="full" class="alert alert-danger" style="text-align: center" role="alert">
+            Revise que todos los campos esten completos<br> y/o que las passwords coincidan.
+        </div>
+        <button disabled id="submitButton" type="submit" class="btn btn-outline-dark w-100">Registrar</button>
+    </form>
+</div>
+
+<script>
+
+    const observables = {
+        name: document.getElementById('name'),
+        email: document.getElementById('email'),
+        phone: document.getElementById('phone'),
+        password: document.getElementById('password'),
+        passwordCheck: document.getElementById('passwordCheck')
+    }
+
+    const validations = {}
+
+    const checkInput = (event) => {
+        validations[event.target.name] = String(event.target.value).trim() !== '';
+
+        if(!(Object.keys(validations).length === 5 && Object.values(validations).every((value) => value) && observables.password.value === observables.passwordCheck.value)) {
+            document.getElementById('full').style.display = ''
+            document.getElementById('submitButton').disabled = true;
+        } else {
+            document.getElementById('full').style.display = 'none'
+            document.getElementById('submitButton').disabled = false;
+        }
+    }
+
+</script>

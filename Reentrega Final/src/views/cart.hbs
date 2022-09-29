@@ -1,0 +1,90 @@
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/productos">E-commerce</a>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/productos">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/carrito">Carrito</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/chat">Chat</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<h4>Carrito</h4>
+<div id="cart">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Description</th>
+            <th scope="col">Cantidad</th>
+        </tr>
+        </thead>
+        <tbody id="cart-rows">
+        </tbody>
+    </table>
+    <button id="clear" type="button" class="btn btn-danger">Vaciar carrito</button>
+    <button id="send-cart" type="button" class="btn btn-success">Enviar orden</button>
+</div>
+
+
+<script>
+    const fetchCart = async () => {
+        const id = localStorage.getItem('cartId');
+
+        document.getElementById('cart-rows').innerHTML = ''
+
+        if(id) {
+            const response = await fetch(`/api/cart/${id}`);
+            const data = await response.json();
+            console.log(data)
+            data.rows.forEach((row) => {
+                document.getElementById('cart-rows').innerHTML += `
+                    <tr>
+                        <th scope="row">${row.item.description}</th>
+                        <td>${row.quantity}</td>
+                    </tr>
+                `
+            })
+        }
+    }
+
+    document.getElementById('clear').addEventListener('click', async () => {
+        const id = localStorage.getItem('cartId');
+        const response = await fetch(`/api/cart/${id}`, {
+            method: 'DELETE'
+        });
+        await response.json()
+        localStorage.removeItem('cartId');
+        document.getElementById('cart-rows').innerHTML = ''
+    })
+
+    document.getElementById('send-cart').addEventListener('click', async () => {
+        const response = await fetch(`/api/order/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                cartId: localStorage.getItem('cartId'),
+
+            })
+        });
+        await response.json()
+        const id = localStorage.getItem('cartId');
+        const responseCartDelete = await fetch(`/api/cart/${id}`, {
+            method: 'DELETE'
+        });
+        await responseCartDelete.json()
+        localStorage.removeItem('cartId');
+        document.getElementById('cart-rows').innerHTML = ''
+    })
+
+    fetchCart()
+</script>

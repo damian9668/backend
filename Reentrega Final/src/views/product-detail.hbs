@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/productos">E-commerce</a>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/productos">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/carrito">Carrito</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/chat">Chat</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="producto" style="text-align: center; display: flex; justify-content: center; align-content: center; margin: 0">
+
+</div>
+
+<script>
+    const cardTemplate = (card) => `
+        <div class="card w-50" style="width: 18rem">
+            <img class="card-img-top" src="${card.photoUrl}" alt="Card image cap">
+            <div class="card-body">
+                <h1 id="id" style="display: none">${card._id}</h1>
+                <h3 id="description" class="card-text">${card.description}</h3>
+                <h6 style="color: green">$ ${card.price}</h6>
+                <button id="${card._id}-${card.description}" class="btn btn-primary">Añadir al carrito</button>
+            </div>
+        </div>
+        `
+
+    const fetchOne = async () => {
+
+        const url = window.location.href.split('/')
+
+        const response = await fetch(`/api/productos/one/${url[url.length-1]}`);
+        return response.json();
+    }
+
+    fetchOne().then((card) => {
+        if(card.message !== undefined) {
+            alert('El producto no existe.')
+        } else {
+            document.getElementById('producto').innerHTML = cardTemplate(card)
+        }
+    })
+
+</script>

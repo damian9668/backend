@@ -1,0 +1,98 @@
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/productos">E-commerce</a>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/productos">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/carrito">Carrito</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/chat">Chat</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="cards"
+     style="display: grid; grid-template-columns: minmax(1.2rem, 1fr) minmax(auto, 57ch) minmax(1.2rem, 1fr);">
+</div>
+
+<script>
+    const fetchAllProducts = async () => {
+
+        const pathArray = window.location.pathname.split('/').filter((v) => v !== '')
+
+        console.log(pathArray)
+
+        const toSearch = (pathArray.length === 1) ? '' : `/${pathArray[pathArray.length - 1]}`;
+
+        const data = await fetch(`/api/productos${toSearch}`);
+        return data.json();
+    }
+
+    const cardTemplate = (card) => `
+    <div class="card" style="width: 18rem; text-align: center">
+        <img class="card-img-top" src="${card.photoUrl}" alt="Card image cap">
+        <div class="card-body">
+            <h1 id="id" style="display: none">${card._id}</h1>
+            <h3 id="description" class="card-text">${card.description}</h3>
+            <h6 style="color: green">$ ${card.price}</h6>
+            <a href="/productos/detalle/${card._id}" class="btn btn-primary">Detalle</a>
+            <button id="${card._id}-${card.description}" class="btn btn-primary">Añadir al carrito</button>
+        </div>
+    </div>
+    `
+
+    fetchAllProducts().then((cards) => {
+        cards.forEach((card) => {
+            document.getElementById('cards').innerHTML += cardTemplate(card)
+        })
+        cards.forEach((card) => {
+            document.getElementById(`${card._id}-${card.description}`).addEventListener('click', async (e) => {
+                const [id, description] = e.srcElement.id.split("-");
+                await saveItemInCart(id, description)
+            })
+        })
+    })
+
+    const findPreviousCart = () => {
+        return localStorage.getItem('cartId');
+    }
+
+    const savePreviousCart = (cartId) => {
+        localStorage.setItem('cartId', cartId)
+    }
+
+    const saveItemInCart = async (id, description) => {
+
+        const cartId = findPreviousCart();
+        const body = {
+            product: {
+                id,
+                description
+            }
+        }
+
+        if (cartId) {
+            body.id = cartId;
+        }
+
+        const response = await fetch(`/api/cart`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        });
+
+        if (!cartId) {
+            const {id: cartIdResponse} = await response.json();
+
+            savePreviousCart(cartIdResponse);
+        }
+    }
+</script>

@@ -1,0 +1,56 @@
+<script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/productos">E-commerce</a>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/productos">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/carrito">Carrito</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/chat">Chat</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div id="messages">
+
+</div>
+<div class="input-group mb-3">
+    <input style="display: none" id="email" value="{{email}}">
+    <input id="message" type="text" class="form-control" placeholder="Mensaje" aria-label="Recipient's username" aria-describedby="button-addon2">
+    <button id="send" class="btn btn-primary" type="button">Enviar</button>
+</div>
+<div>
+    <a id="view" class="btn btn-primary" type="button" href="/chat/{{email}}">Ver Mis Mensajes</a>
+</div>
+
+<script>
+    let socket = io.connect("/", { forceNew: true });
+
+    const templateMessage = (email, text, date) => `
+        <div class="alert alert-secondary" role="alert">
+          ${email} [${date}] ${text}
+        </div>
+    `
+
+    socket.on("messages", function (data) {
+        document.getElementById('messages').innerHTML = "";
+        data.forEach((value) => {
+            document.getElementById('messages').innerHTML += templateMessage(value.email, value.text, value.date)
+        })
+    });
+
+    document.getElementById('send').addEventListener('click', () => {
+        socket.emit("messages", {
+            email: document.getElementById('email').value,
+            text: document.getElementById('message').value,
+            date: new Date().toISOString()
+        });
+        document.getElementById('message').value = ''
+    })
+</script>
